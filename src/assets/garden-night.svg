@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620">
+<defs>
+<linearGradient id="sky" x2="0" y2="1"><stop stop-color="#211B3D"/><stop offset="1" stop-color="#2A2148"/></linearGradient>
+<linearGradient id="ground" x2="0" y2="1"><stop stop-color="#526E68"/><stop offset="1" stop-color="#304D45"/></linearGradient>
+</defs>
+<rect width="1200" height="620" rx="42" fill="url(#sky)"/>
+<circle cx="1030" cy="105" r="48" fill="#F1ECFA"/><circle cx="1050" cy="88" r="48" fill="#211B3D"/><g fill="#EFB765"><circle cx="170" cy="115" r="4"/><circle cx="260" cy="180" r="3"/><circle cx="470" cy="95" r="4"/><circle cx="690" cy="145" r="3"/></g>
+<path d="M0 355Q180 285 360 350T720 335T1200 350V620H0Z" fill="#384253"/>
+<path d="M0 410Q190 340 390 405T780 390T1200 405V620H0Z" fill="#41565B"/>
+<path d="M0 445Q200 395 420 445T820 435T1200 450V620H0Z" fill="url(#ground)"/>
+<!-- pink flower -->
+<g transform="translate(145 405)"><path d="M0 45V115" stroke="#6E9E7C" stroke-width="8"/><ellipse cy="30" rx="13" ry="27" fill="#DE7B9E"/><ellipse cx="-17" cy="17" rx="13" ry="27" fill="#F2A9C3" transform="rotate(-35 -17 17)"/><ellipse cx="17" cy="17" rx="13" ry="27" fill="#F2A9C3" transform="rotate(35 17 17)"/></g>
+<!-- sunflower -->
+<g transform="translate(350 375)"><path d="M0 55V155" stroke="#6E9E7C" stroke-width="9"/><g fill="#EFB765"><ellipse cy="0" rx="18" ry="35"/><ellipse cy="70" rx="18" ry="35"/><ellipse cx="-35" cy="35" rx="35" ry="18"/><ellipse cx="35" cy="35" rx="35" ry="18"/><ellipse cx="-25" cy="10" rx="18" ry="32" transform="rotate(-45 -25 10)"/><ellipse cx="25" cy="10" rx="18" ry="32" transform="rotate(45 25 10)"/><ellipse cx="-25" cy="60" rx="18" ry="32" transform="rotate(45 -25 60)"/><ellipse cx="25" cy="60" rx="18" ry="32" transform="rotate(-45 25 60)"/></g><circle cy="35" r="18" fill="#8D5E29"/></g>
+<!-- purple flower -->
+<g transform="translate(565 420)"><path d="M0 30V105" stroke="#6E9E7C" stroke-width="7"/><g fill="#7C6BD4"><circle cx="-12" cy="25" r="10"/><circle cx="12" cy="25" r="10"/><circle cy="10" r="10"/><circle cy="40" r="10"/></g><circle cy="25" r="5" fill="#EFB765"/></g>
+<!-- pink flower -->
+<g transform="translate(770 400)"><path d="M0 48V145" stroke="#7E634E" stroke-width="9"/><g fill="#DE7B9E"><circle cx="-22" cy="30" r="25"/><circle cy="12" r="25"/><circle cx="22" cy="30" r="25"/><circle cy="42" r="25"/></g><circle cy="30" r="8" fill="#F2C3D5"/></g>
+<!-- shrub -->
+<g transform="translate(900 440)" fill="#6E9E7C"><rect x="-8" width="16" height="90" rx="8"/><rect x="-40" y="20" width="28" height="65" rx="14"/><rect x="12" y="10" width="28" height="75" rx="14"/></g>
+<!-- bench -->
+<g transform="translate(1010 475)" fill="#A77C59"><rect width="120" height="18" rx="7"/><rect x="5" y="-30" width="110" height="16" rx="7" fill="#B58A65"/><rect x="14" y="15" width="10" height="55" rx="5" fill="#8D674C"/><rect x="96" y="15" width="10" height="55" rx="5" fill="#8D674C"/></g>
+</svg>

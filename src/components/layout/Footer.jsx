@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 function Footer() {
   return (
@@ -7,9 +6,12 @@ function Footer() {
         className="
         flex
         flex-col
-    font-[Instrumental]
-    bg-[#F1ECFA]
-    dark:bg-[#211B3D]/85
+    font-serif
+    bg-background
+    dark:bg-[#140F2E]
+    border-t
+    border-[#E4DBF4]
+    dark:border-white/10
     text-[#453D6B]
     dark:text-[#C2B3E4]
     px-6
@@ -37,7 +39,7 @@ function Footer() {
           text-2xl
           md:text-3xl
           text-[#211B3D]
-          dark:text-[#F1ECFA]
+          dark:text-foreground
         "
             >
               Fondra
@@ -50,7 +52,7 @@ function Footer() {
           </div>
 
           <div>
-            <h2 className="font-bold text-base md:text-lg text-[#211B3D] dark:text-[#F1ECFA]">
+            <h2 className="font-bold text-base md:text-lg text-[#211B3D] dark:text-foreground">
               The app
             </h2>
 
@@ -62,18 +64,18 @@ function Footer() {
           </div>
 
           <div>
-            <h2 className="font-bold text-base md:text-lg text-[#211B3D] dark:text-[#F1ECFA]">
+            <h2 className="font-bold text-base md:text-lg text-[#211B3D] dark:text-foreground">
               Your account
             </h2>
 
             <div className="flex flex-col gap-3 mt-4 text-sm md:text-base">
-              <a href="#login">Sign in</a>
+              <a to="/login">Sign in</a>
               <Link to="/signup">Create an account</Link>
             </div>
           </div>
 
           <div>
-            <h2 className="font-bold text-base md:text-lg text-[#211B3D] dark:text-[#F1ECFA]">
+            <h2 className="font-bold text-base md:text-lg text-[#211B3D] dark:text-foreground">
               About{" "}
             </h2>
 

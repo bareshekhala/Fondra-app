@@ -1,15 +1,271 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
 @custom-variant dark (&:where(.dark, .dark *));
 
-body{
-    background: #F1ECFA
+@theme {
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+
+  --color-background: #F1ECFA;
+  --color-foreground: #211B3D;
+  --color-card: #FFFFFF;
+  --color-card-foreground: #211B3D;
+  --color-popover: #FFFFFF;
+  --color-popover-foreground: #211B3D;
+  --color-primary: #7C6BD4;
+  --color-primary-foreground: #FFFFFF;
+  --color-secondary: #F2C3D5;
+  --color-secondary-foreground: #2A2148;
+  --color-muted: #EFEAF8;
+  --color-muted-foreground: #6E6598;
+  --color-accent: #F2C3D5;
+  --color-accent-foreground: #2A2148;
+  --color-destructive: #D64B6A;
+  --color-border: #E2DBF1;
+  --color-input: #D8CFEC;
+  --color-ring: #7C6BD4;
+
+  --radius-sm: 12px;
+  --radius-md: 14px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
 }
-.dark body {
-  background-color: #777293
+
+.dark {
+  --color-background: #1D1739;
+  --color-foreground: #F1ECFA;
+  --color-card: #2A2148;
+  --color-card-foreground: #F1ECFA;
+  --color-popover: #2A2148;
+  --color-popover-foreground: #F1ECFA;
+  --color-primary: #A38DF0;
+  --color-primary-foreground: #1D1739;
+  --color-secondary: #3A3060;
+  --color-secondary-foreground: #F1ECFA;
+  --color-muted: #2F2752;
+  --color-muted-foreground: #9C92C4;
+  --color-accent: #3A3060;
+  --color-accent-foreground: #F1ECFA;
+  --color-destructive: #F28BA5;
+  --color-border: rgba(255, 255, 255, 0.12);
+  --color-input: rgba(255, 255, 255, 0.18);
+  --color-ring: #A38DF0;
 }
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background;
+  }
+}
+
 #root {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
 }
 
+
+
+@layer components {
+  .glass-card {
+    @apply rounded-3xl border border-white/60 bg-white/70 backdrop-blur-md dark:border-white/12 dark:bg-white/8;
+  }
+}
+
+.navbar-glass {
+  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.dark .navbar-glass {
+  background: rgba(33, 27, 61, 0.6);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+/* round Pencil / Trash buttons */
+.icon-button {
+  @apply flex size-8 items-center justify-center rounded-full border border-white/70 bg-white/80 text-muted-foreground transition hover:bg-white hover:text-[#211B3D] disabled:opacity-50 dark:border-white/15 dark:bg-white/10 dark:text-[#9C92C4] dark:hover:text-foreground;
+}
+
+/* "+ Add note" / "+ Add social energy" */
+.add-button {
+  @apply mt-2 text-xs font-bold text-[#7C6BD4] transition hover:text-[#211B3D] disabled:opacity-50 dark:text-[#A38DF0] dark:hover:text-foreground;
+}
+
+.dialog-title {
+  @apply font-serif text-2xl italic text-[#211B3D] dark:text-foreground;
+}
+
+.dialog-box {
+  @apply rounded-3xl bg-white dark:bg-[#2A2148];
+}
+
+.pink-button {
+  @apply rounded-full bg-linear-to-b from-[#FFFCFE] to-[#F2C3D5] px-6 font-bold text-[#2A2148] shadow-[0_6px_18px_rgba(222,123,158,0.34)];
+}
+
+
+/* Garden */
+
+.garden-flower img {
+  transform-origin: bottom center;
+  animation: flower-sway 5s ease-in-out infinite;
+  filter: drop-shadow(0 6px 6px rgba(33, 27, 61, 0.18));
+}
+
+.garden-flower:nth-child(even) img {
+  animation-delay: -2.5s;
+}
+
+@keyframes flower-sway {
+  0%,
+  100% {
+    transform: rotate(-2.5deg);
+  }
+  50% {
+    transform: rotate(2.5deg);
+  }
+}
+
+
+/* Loader */
+
+.logo-loader {
+  position: relative;
+  width: 205px;
+  height: 205px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-loader::after {
+  content: "";
+  position: absolute;
+  width: 125px;
+  height: 125px;
+  border-radius: 9999px;
+  background: rgba(124, 107, 212, 0.16);
+  filter: blur(22px);
+  animation: loader-halo 2.1s ease-in-out infinite;
+}
+
+.dark .logo-loader::after {
+  background: rgba(124, 107, 212, 0.13);
+}
+
+.logo-loader svg {
+  position: relative;
+  z-index: 2;
+  width: 158px;
+  height: 158px;
+  overflow: visible;
+}
+
+.logo-loader .petal {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: loader-petal 1.95s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+.logo-loader .petal-1 {
+  animation-delay: 0s;
+}
+
+.logo-loader .petal-3 {
+  animation-delay: 0.08s;
+}
+
+.logo-loader .petal-4 {
+  animation-delay: 0.16s;
+}
+
+.logo-loader .petal-5 {
+  animation-delay: 0.24s;
+}
+
+.logo-loader .drift {
+  animation: loader-drift 1.65s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
+.logo-loader .core {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: loader-core 1.95s ease-in-out infinite;
+}
+
+.logo-loader-text {
+  margin-top: 18px;
+  font-family: "Instrument Serif", serif;
+  font-size: 17px;
+  font-weight: 500;
+  color: #292344;
+  text-align: center;
+}
+
+.logo-loader-tagline {
+  margin-top: 9px;
+  font-family: "Instrument Serif", serif;
+  font-size: 13px;
+  color: #292344;
+  opacity: 0.6;
+  text-align: center;
+}
+
+@keyframes loader-petal {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.96;
+  }
+  50% {
+    transform: scale(0.76) rotate(10deg);
+    opacity: 0.55;
+  }
+}
+
+@keyframes loader-drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(12px, -12px) scale(0.72) rotate(24deg);
+    opacity: 0.12;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.4;
+  }
+}
+
+@keyframes loader-core {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.45);
+    opacity: 0.62;
+  }
+}
+
+@keyframes loader-halo {
+  0%,
+  100% {
+    transform: scale(0.82);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 1;
+  }
+}

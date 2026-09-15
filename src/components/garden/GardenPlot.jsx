@@ -6,11 +6,12 @@ import gardenDay from "@/assets/garden-plot-day.svg";
 import gardenNight from "@/assets/garden-plot-night.svg";
 
 function GardenPlot({ flowers }) {
+  const PLOT_CAPACITY = 15;
+
   const growing = flowers.filter((flower) => flower.picked);
 
   const shown = growing.slice(0, PLOT_CAPACITY);
   const hidden = growing.length - shown.length;
-  const PLOT_CAPACITY = 15;
 
   return (
     <div className="relative aspect-video overflow-hidden rounded-3xl shadow-[0_16px_40px_rgba(33,27,61,0.1)]">

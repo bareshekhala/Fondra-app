@@ -126,50 +126,48 @@ function ProfilePage() {
             JPG, PNG or WEBP · up to 3 MB
           </p>
 
-          {user
-            ? user.avatar
-            : "" && (
-                <AlertDialog open={removeOpen} onOpenChange={setRemoveOpen}>
-                  <AlertDialogTrigger
-                    render={
-                      <button
-                        type="button"
-                        disabled={busy}
-                        className="add-button mt-4"
-                      >
-                        Remove picture
-                      </button>
-                    }
-                  />
+          {user && user.avatar && (
+            <AlertDialog open={removeOpen} onOpenChange={setRemoveOpen}>
+              <AlertDialogTrigger
+                render={
+                  <button
+                    type="button"
+                    disabled={busy}
+                    className="add-button mt-4"
+                  >
+                    Remove picture
+                  </button>
+                }
+              />
 
-                  <AlertDialogContent className="dialog-box">
-                    <AlertDialogHeader>
-                      <AlertDialogTitle className="dialog-title">
-                        Remove your picture?
-                      </AlertDialogTitle>
+              <AlertDialogContent className="dialog-box">
+                <AlertDialogHeader>
+                  <AlertDialogTitle className="dialog-title">
+                    Remove your picture?
+                  </AlertDialogTitle>
 
-                      <AlertDialogDescription>
-                        Your circle will see your initials instead until you
-                        upload a new one.
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
+                  <AlertDialogDescription>
+                    Your circle will see your initials instead until you
+                    upload a new one.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
 
-                    <AlertDialogFooter className="rounded-b-3xl">
-                      <AlertDialogCancel className="rounded-full">
-                        Cancel
-                      </AlertDialogCancel>
+                <AlertDialogFooter className="rounded-b-3xl">
+                  <AlertDialogCancel className="rounded-full">
+                    Cancel
+                  </AlertDialogCancel>
 
-                      <AlertDialogAction
-                        variant="destructive"
-                        onClick={handleRemove}
-                        className="rounded-full"
-                      >
-                        Remove
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
-              )}
+                  <AlertDialogAction
+                    variant="destructive"
+                    onClick={handleRemove}
+                    className="rounded-full"
+                  >
+                    Remove
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          )}
         </section>
 
         <Link

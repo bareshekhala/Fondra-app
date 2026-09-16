@@ -4,7 +4,7 @@ import CircleMember from "@/components/circle/CircleMember.jsx";
 function CircleCard({ circle }) {
 
   return (
-    <section className="mt-8 md:mt-0">
+    <section className="glass-card flex h-full flex-col px-5 py-5">
 
       <div className="mb-3 flex items-baseline justify-between">
         <h2 className="font-serif text-2xl italic text-[#211B3D] dark:text-foreground">
@@ -21,7 +21,7 @@ function CircleCard({ circle }) {
 
 
       {circle.length === 0 ? (
-        <div className="glass-card px-6 py-12 text-center">
+        <div className="px-1 py-8 text-center">
           <p className="mx-auto max-w-xs text-sm text-muted-foreground dark:text-[#9C92C4]">
             Nobody here yet. Add the people who'd notice if you went quiet.
           </p>
@@ -34,7 +34,7 @@ function CircleCard({ circle }) {
           </Link>
         </div>
       ) : (
-        <ul className="glass-card px-5">
+        <ul className="-my-3">
           {circle.map((otherUser) => (
             <CircleMember
               key={otherUser._id}

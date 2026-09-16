@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import service from "@/services/index.service.js";
 import { AuthContext } from "@/context/auth.context.jsx";
@@ -26,13 +26,15 @@ import {
 const MAX_SIZE = 3 * 1024 * 1024;
 
 function ProfilePage() {
-  const { user, getUser } = useContext(AuthContext);
+  const { user, getUser, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [busy, setBusy] = useState(false);
   const [removeOpen, setRemoveOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
 const [name, setName] = useState(user ? user.name : "")
 
-
+//for profile picture -> post
   const handleUpload = async (e) => {
     const file = e.target.files[0];
     e.target.value = "";
@@ -69,6 +71,7 @@ const [name, setName] = useState(user ? user.name : "")
     }
   };
 
+  //for profile picture -> delete
   const handleRemove = async () => {
     setRemoveOpen(false);
     setBusy(true);
@@ -88,7 +91,7 @@ const [name, setName] = useState(user ? user.name : "")
     }
   };
 
-
+//for editing the name -> post
   const handleRename = async (e) => {
   e.preventDefault();
   if (name.trim() === user.name)
@@ -107,6 +110,26 @@ const [name, setName] = useState(user ? user.name : "")
   }
   setBusy(false);
 };
+
+// delete account
+  const handleDeleteAccount = async () => {
+    setDeleteOpen(false);
+    setBusy(true);
+
+    try {
+      await toast.promise(service.delete("/users/delete-account"), {
+        loading: "Deleting your account…",
+        success: "Your account is gone. Take care.",
+        error: showError,
+      });
+
+      logout();
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      setBusy(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background dark:bg-[#1D1739]">
@@ -229,6 +252,58 @@ const [name, setName] = useState(user ? user.name : "")
               {name.length} / 40
             </p>
           </form>
+        </section>
+
+        <section className="glass-card mt-4 px-6 py-6">
+          <h2 className="font-serif text-xl italic text-[#211B3D] dark:text-foreground">
+            Delete account
+          </h2>
+
+          <p className="mt-1 text-xs font-medium text-muted-foreground dark:text-[#9C92C4]">
+            Your check-ins, pokes, garden and circle go with it. There is no undo.
+          </p>
+
+          <AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
+            <AlertDialogTrigger
+              render={
+                <button
+                  type="button"
+                  disabled={busy}
+                  className="mt-4 rounded-full border border-red-300 px-5 py-2 text-sm font-bold text-red-600 transition hover:bg-red-50 disabled:opacity-50 dark:border-red-400/40 dark:text-red-300 dark:hover:bg-red-400/10"
+                >
+                  Delete my account
+                </button>
+              }
+            />
+
+            <AlertDialogContent className="dialog-box">
+              <AlertDialogHeader>
+                <AlertDialogTitle className="dialog-title">
+                  Delete your account?
+                </AlertDialogTitle>
+
+                <AlertDialogDescription>
+                  Everything you have here is removed for good: your profile,
+                  check-ins, pokes, flowers and the people in your circle.
+                  Are you sure?
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+
+              <AlertDialogFooter className="rounded-b-3xl">
+                <AlertDialogCancel className="rounded-full">
+                  Keep my account
+                </AlertDialogCancel>
+
+                <AlertDialogAction
+                  variant="destructive"
+                  onClick={handleDeleteAccount}
+                  className="rounded-full"
+                >
+                  Yes, delete everything
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </section>
 
         <Link

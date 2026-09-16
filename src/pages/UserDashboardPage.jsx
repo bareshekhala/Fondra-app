@@ -9,6 +9,7 @@ import CheckInCard from "@/components/checkin/CheckInCard.jsx";
 import CircleCard from "@/components/circle/CircleCard.jsx";
 import ConnectionMap from "@/components/circle/ConnectionMap.jsx";
 import GardenPeekCard from "@/components/garden/GardenPeekCard.jsx";
+import NotificationsCard from "@/components/notifications/NotificationsCard.jsx";
 import Loader from "@/components/shared/Loader.jsx";
 
 function UserDashboardPage() {
@@ -17,6 +18,8 @@ function UserDashboardPage() {
   const [circle, setCircle] = useState([]);
   const [garden, setGarden] = useState([]);
   const [unplanted, setUnplanted] = useState(0);
+  const [notifications, setNotifications] = useState([]);
+  const [unread, setUnread] = useState(0);
   const [loading, setLoading] = useState(true);
 
   //get -> location 
@@ -48,6 +51,14 @@ function UserDashboardPage() {
 
       const pokesResponse = await service.get("/pokes/unplanted");
       setUnplanted((pokesResponse.data.pokes || []).length);
+
+      const notificationsResponse = await service.get("/notifications");
+      setNotifications(notificationsResponse.data.notifications || []);
+      setUnread(notificationsResponse.data.unread || 0);
+
+      if (notificationsResponse.data.unread > 0) {
+        await service.patch("/notifications/read");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -109,6 +120,10 @@ function UserDashboardPage() {
 
           <div className="md:col-span-4">
             <GardenPeekCard flowers={garden} unplanted={unplanted} />
+          </div>
+
+          <div className="md:col-span-3">
+            <NotificationsCard notifications={notifications} unread={unread} />
           </div>
         </div>
       </div>

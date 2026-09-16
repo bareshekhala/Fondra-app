@@ -62,7 +62,7 @@ function MyCollectionPage() {
             ? "1 flower, from someone who thought of you"
             : `${garden.length} flowers, each one from someone who thought of you`}
 
-          {garden.length > 0 && ` ${inGarden} picked for the garden`}
+          {garden.length > 0 && ` · ${inGarden} of 15 picked for the garden`}
         </p>
 
 

@@ -89,7 +89,6 @@
   border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
-/* round Pencil / Trash buttons */
 .icon-button {
   @apply flex size-8 items-center justify-center rounded-full border border-white/70 bg-white/80 text-muted-foreground transition hover:bg-white hover:text-[#211B3D] disabled:opacity-50 dark:border-white/15 dark:bg-white/10 dark:text-[#9C92C4] dark:hover:text-foreground;
 }
@@ -112,7 +111,17 @@
 }
 
 
-/* Garden */
+.map-label {
+  paint-order: stroke fill;
+  stroke: rgba(255, 255, 255, 0.85);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
+.dark .map-label {
+  stroke: rgba(29, 23, 57, 0.85);
+}
+
 
 .garden-flower img {
   transform-origin: bottom center;

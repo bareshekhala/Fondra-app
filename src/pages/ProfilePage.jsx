@@ -6,6 +6,8 @@ import { AuthContext } from "@/context/auth.context.jsx";
 
 import Navbar from "@/components/layout/Navbar.jsx";
 import Avatar from "@/components/shared/Avatar.jsx";
+import { Input } from "@/components/ui/input.jsx";
+import { Label } from "@/components/ui/label.jsx";
 import { toast } from "@/components/ui/toast.jsx";
 import showError from "@/utils/showError.js";
 
@@ -28,6 +30,8 @@ function ProfilePage() {
 
   const [busy, setBusy] = useState(false);
   const [removeOpen, setRemoveOpen] = useState(false);
+const [name, setName] = useState(user ? user.name : "")
+
 
   const handleUpload = async (e) => {
     const file = e.target.files[0];
@@ -57,7 +61,7 @@ function ProfilePage() {
         error: showError,
       });
 
-      getUser(); // the context reloads the user, so the navbar avatar updates too
+      getUser(); 
       setBusy(false);
     } catch (error) {
       console.log(error);
@@ -84,6 +88,26 @@ function ProfilePage() {
     }
   };
 
+
+  const handleRename = async (e) => {
+  e.preventDefault();
+  if (name.trim() === user.name)
+    return;
+
+  setBusy(true);
+  try {
+    await toast.promise(service.patch("/users/me", { name }), {
+      loading: "Saving…",
+      success: "Name updated",
+      error: showError,
+    });
+    getUser();
+  } catch (error) {
+    console.log(error);
+  }
+  setBusy(false);
+};
+
   return (
     <div className="min-h-screen bg-background dark:bg-[#1D1739]">
       <Navbar />
@@ -95,7 +119,7 @@ function ProfilePage() {
           </div>
 
           <h1 className="mt-5 font-serif text-3xl italic text-[#211B3D] dark:text-foreground">
-            {user ? `@${user.name}` : ""}
+            {user ? `${user.name}` : ""}
           </h1>
 
           <p className="mt-1 text-sm font-medium text-muted-foreground dark:text-[#9C92C4]">
@@ -121,10 +145,6 @@ function ProfilePage() {
               className="hidden"
             />
           </label>
-
-          <p className="mt-2 text-xs text-muted-foreground dark:text-[#9C92C4]">
-            JPG, PNG or WEBP · up to 3 MB
-          </p>
 
           {user && user.avatar && (
             <AlertDialog open={removeOpen} onOpenChange={setRemoveOpen}>
@@ -168,6 +188,47 @@ function ProfilePage() {
               </AlertDialogContent>
             </AlertDialog>
           )}
+        </section>
+
+        <section className="glass-card mt-4 px-6 py-6">
+          <h2 className="font-serif text-xl italic text-[#211B3D] dark:text-foreground">
+            Your name
+          </h2>
+
+          <p className="mt-1 text-xs font-medium text-muted-foreground dark:text-[#9C92C4]">
+            This is how your people see you. Your username stays the same.
+          </p>
+
+          <form onSubmit={handleRename} className="mt-4 flex flex-col gap-2">
+            <Label htmlFor="name" className="text-[#403A5D] dark:text-gray-100">
+              Name
+            </Label>
+
+            <div className="flex gap-2">
+              <Input
+                id="name"
+                type="text"
+                value={name}
+                maxLength={40}
+                placeholder="Your name"
+                disabled={busy}
+                onChange={(e) => setName(e.target.value)}
+                className="h-10 rounded-full dark:text-[#dfdcec]"
+              />
+
+              <button
+                type="submit"
+                disabled={busy || !name.trim() || name.trim() === user.name}
+                className="pink-button shrink-0 py-2 text-sm disabled:pointer-events-none disabled:opacity-50"
+              >
+                Save
+              </button>
+            </div>
+
+            <p className="text-right text-[11px] text-muted-foreground dark:text-[#9C92C4]">
+              {name.length} / 40
+            </p>
+          </form>
         </section>
 
         <Link

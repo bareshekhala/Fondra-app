@@ -117,6 +117,18 @@ function ConnectionMap({ circle = [], onRefreshLocation }) {
               floodOpacity="0.22"
             />
           </filter>
+
+          <linearGradient id="map-land" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={WIDTH} y2={HEIGHT * 0.4}>
+            <stop offset="0%" className="[stop-color:#CDC2F4] dark:[stop-color:#6457B8]" />
+            <stop offset="50%" className="[stop-color:#F0C6D8] dark:[stop-color:#8F5F8A]" />
+            <stop offset="100%" className="[stop-color:#FFDCC7] dark:[stop-color:#AE7E70]" />
+          </linearGradient>
+
+          <linearGradient id="map-line" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={WIDTH} y2="0">
+            <stop offset="0%" className="[stop-color:#7C6BD4] dark:[stop-color:#B7A6FF]" />
+            <stop offset="50%" className="[stop-color:#D8789F] dark:[stop-color:#F2A7C3]" />
+            <stop offset="100%" className="[stop-color:#E5956B] dark:[stop-color:#FFD3B6]" />
+          </linearGradient>
         </defs>
 
         <Geographies geography={land}>
@@ -125,10 +137,9 @@ function ConnectionMap({ circle = [], onRefreshLocation }) {
               <Geography
                 key={geo.rsmKey}
                 geography={geo}
-                fill="#E2DBF1"
-                stroke="none"
+                fill="url(#map-land)"
                 filter="url(#map-grain)"
-                className="fill-border dark:fill-[#4F4784] dark:stroke-[#6A60A3] dark:stroke-[0.4]"
+                className="stroke-white/60 stroke-[0.4] dark:stroke-white/15"
                 style={{
                   default: { outline: "none" },
                   hover: { outline: "none" },
@@ -146,9 +157,9 @@ function ConnectionMap({ circle = [], onRefreshLocation }) {
               key={`line-${otherUser._id}`}
               from={toCoords(me)}
               to={toCoords(otherUser)}
-              stroke={LINE}
-              strokeWidth={1.4}
-              strokeOpacity={0.7}
+              stroke="url(#map-line)"
+              strokeWidth={1.6}
+              strokeOpacity={0.9}
               strokeLinecap="round"
             />
           ))}
@@ -194,7 +205,7 @@ function ConnectionMap({ circle = [], onRefreshLocation }) {
               y={-1}
               fontSize={12}
               fontWeight={700}
-              className="map-label fill-[#211B3D] dark:fill-background"
+              className="map-label fill-[#211B3D] dark:fill-foreground"
             >
               {otherUser.name}
             </text>
@@ -215,12 +226,14 @@ function ConnectionMap({ circle = [], onRefreshLocation }) {
 
         {me && (
           <Marker coordinates={toCoords(me)}>
+            {/* mint is used only here, so "you" is the one thing that stands out */}
+            <circle r={26} className="fill-[#2FB596]/15 dark:fill-[#9EF0D2]/20" />
+
             <circle
               r={20}
               fill="none"
-              stroke={LINE}
               strokeWidth={1}
-              strokeOpacity={0.6}
+              className="stroke-[#2FB596] dark:stroke-[#9EF0D2]"
             />
 
             <circle r={16} fill="#fff" filter="url(#map-shadow)" />
@@ -243,14 +256,14 @@ function ConnectionMap({ circle = [], onRefreshLocation }) {
               </>
             ) : (
               <>
-                <circle r={14} fill={LINE} />
+                <circle r={14} className="fill-[#2FB596] dark:fill-[#9EF0D2]" />
 
                 <text
                   textAnchor="middle"
                   y={5}
                   fontSize={14}
                   fontWeight={700}
-                  fill="#fff"
+                  className="fill-white dark:fill-[#1D1739]"
                 >
                   {initialOf(me)}
                 </text>
@@ -262,7 +275,7 @@ function ConnectionMap({ circle = [], onRefreshLocation }) {
               y={31}
               fontSize={12}
               fontWeight={700}
-              className="map-label fill-[#211B3D] dark:fill-background"
+              className="map-label fill-[#1F8A72] dark:fill-[#9EF0D2]"
             >
               You
             </text>

@@ -9,7 +9,7 @@ import showError from "@/utils/showError.js";
 import { useContext, useState } from "react";
 
 export function LoginCard(){
-  const { getUser, isLoggedIn } = useContext(AuthContext);
+  const { getUser } = useContext(AuthContext);
 
   const navigate = useNavigate()
 
@@ -17,20 +17,18 @@ export function LoginCard(){
   const [identifier, setIdentifier] = useState("")
 
   const [errorMessage, setErrorMessage] = useState(null)
-  const [unverifiedEmail, setUnverifiedEmail] = useState(null);
+  const [unverified, setUnverified] = useState(false);
   const [code, setCode] = useState("");
   const [codeSent, setCodeSent] = useState(false);
+  const [resetting, setResetting] = useState(false);
+  const [forgot, setForgot] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
 
   const handleIdentifier = (e) => setIdentifier(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
 
    const handleLogin = async (e) => {
     e.preventDefault();
-
-    if (isLoggedIn) {
-      setErrorMessage("You are already logged in.");
-      return;
-    }
 
     const body = {
      identifier,
@@ -55,7 +53,8 @@ export function LoginCard(){
       setErrorMessage(showError(error));
 
       if (error.response && error.response.status === 403) {
-        setUnverifiedEmail(error.response.data.email);
+        setIdentifier(error.response.data.email);
+        setUnverified(true);
       }
     }
 
@@ -65,7 +64,27 @@ export function LoginCard(){
     setErrorMessage(null);
 
     try {
-      await service.post("/auth/resend-code", { email: unverifiedEmail });
+      await service.post("/auth/resend-code", { email: identifier });
+      setCodeSent(true);
+    } catch (error) {
+      console.log(error);
+      setErrorMessage(showError(error));
+    }
+  };
+
+  const handleForgot = async (e) => {
+    e.preventDefault();
+    setErrorMessage(null);
+
+    if (!identifier.includes("@")) {
+      setErrorMessage("Enter the email you signed up with");
+      return;
+    }
+
+    try {
+      await service.post("/auth/resend-code", { email: identifier });
+      setForgot(false);
+      setResetting(true);
       setCodeSent(true);
     } catch (error) {
       console.log(error);
@@ -78,11 +97,21 @@ export function LoginCard(){
     setErrorMessage(null);
 
     try {
-      await service.post("/auth/verify-email", { email: unverifiedEmail, code });
+      if (resetting) {
+        await service.post("/auth/reset-password", { email: identifier, code, password: newPassword });
+        setErrorMessage("Password changed. Sign in with the new one.");
+      } 
+      else {
+        await service.post("/auth/verify-email", { email: identifier, code });
+        setErrorMessage("Your email is verified. Sign in again.");
+      }
+
       setCodeSent(false);
-      setUnverifiedEmail(null);
+      setResetting(false);
+      setUnverified(false);
       setCode("");
-      setErrorMessage("Your email is verified. Sign in again.");
+      setNewPassword("");
+      setPassword("");
     } catch (error) {
       console.log(error);
       setErrorMessage(showError(error));
@@ -94,9 +123,9 @@ export function LoginCard(){
       <div className="w-full">
         <div className="flex flex-col">
           <span className="auth-eyebrow">Check your email</span>
-          <h1 className="auth-title">Enter your code</h1>
+          <h1 className="auth-title">{resetting ? "Reset your password" : "Enter your code"}</h1>
           <p className="auth-sub">
-            We sent a 6-digit code to {unverifiedEmail}. It expires in 10 minutes.
+            We sent a 6-digit code to {identifier}. It expires in 10 minutes.
           </p>
         </div>
 
@@ -113,9 +142,21 @@ export function LoginCard(){
             className="auth-input h-14 text-center text-2xl tracking-[0.4em]"
           />
 
+          {resetting && (
+            <Input
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              placeholder="New password"
+              autoComplete="new-password"
+              required
+              className="auth-input"
+            />
+          )}
+
           <button
             type="submit"
-            disabled={code.length !== 6}
+            disabled={code.length !== 6 || (resetting && !newPassword)}
             className="violet-button w-full justify-center disabled:opacity-50"
           >
             Verify
@@ -127,6 +168,22 @@ export function LoginCard(){
             Code expired?{" "}
             <button type="button" onClick={handleResend} className="violet-link">
               Resend code
+            </button>
+          </p>
+
+          <p className="auth-alt">
+            <button
+              type="button"
+              onClick={() => {
+                setCodeSent(false);
+                setResetting(false);
+                setCode("");
+                setNewPassword("");
+                setErrorMessage(null);
+              }}
+              className="violet-link"
+            >
+              ← Back to sign in
             </button>
           </p>
         </form>
@@ -143,48 +200,50 @@ export function LoginCard(){
       </div>
 
       <div>
-        <form onSubmit={handleLogin} className="flex flex-col gap-5">
+        <form onSubmit={forgot ? handleForgot : handleLogin} className="flex flex-col gap-5">
           <div className="grid gap-2">
             <Label htmlFor="identifier" className="auth-label">
-              Username or email
+              {forgot ? "Email" : "Username or email"}
             </Label>
 
             <Input
               value={identifier}
               onChange={handleIdentifier}
               id="identifier"
-              type="text"
-              placeholder="Username or email"
-              autoComplete="username"
+              type={forgot ? "email" : "text"}
+              placeholder={forgot ? "The email you signed up with" : "Username or email"}
+              autoComplete={forgot ? "email" : "username"}
               required
               className="auth-input"
             />
           </div>
 
-          <div className="grid gap-2">
-            <Label htmlFor="password" className="auth-label">
-              Password
-            </Label>
+          {!forgot && (
+            <div className="grid gap-2">
+              <Label htmlFor="password" className="auth-label">
+                Password
+              </Label>
 
-            <Input
-              value={password}
-              onChange={handlePasswordChange}
-              id="password"
-              type="password"
-              placeholder="Enter your password"
-              autoComplete="current-password"
-              required
-              className="auth-input"
-            />
-          </div>
+              <Input
+                value={password}
+                onChange={handlePasswordChange}
+                id="password"
+                type="password"
+                placeholder="Enter your password"
+                autoComplete="current-password"
+                required
+                className="auth-input"
+              />
+            </div>
+          )}
 
           <button type="submit" className="violet-button mt-1 w-full justify-center">
-            Sign in
+            {forgot ? "Get a code" : "Sign in"}
           </button>
 
           {errorMessage && <p className="auth-error">{errorMessage}</p>}
 
-          {unverifiedEmail && (
+          {unverified && (
             <p className="auth-alt">
               Signed up but never got the code?{" "}
               <button type="button" onClick={handleResend} className="violet-link">
@@ -194,12 +253,42 @@ export function LoginCard(){
           )}
         </form>
 
-        <p className="auth-alt">
-          New here?{" "}
-          <Link to="/signup" className="violet-link">
-            Create an account
-          </Link>
-        </p>
+        {forgot ? (
+          <p className="auth-alt">
+            <button
+              type="button"
+              onClick={() => {
+                setForgot(false);
+                setErrorMessage(null);
+              }}
+              className="violet-link"
+            >
+              ← Back to sign in
+            </button>
+          </p>
+        ) : (
+          <>
+            <p className="auth-alt">
+              New here?{" "}
+              <Link to="/signup" className="violet-link">
+                Create an account
+              </Link>
+            </p>
+
+            <p className="auth-alt">
+              <button
+                type="button"
+                onClick={() => {
+                  setForgot(true);
+                  setErrorMessage(null);
+                }}
+                className="violet-link"
+              >
+                Forgot your password?
+              </button>
+            </p>
+          </>
+        )}
       </div>
     </div>
   );

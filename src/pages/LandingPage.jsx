@@ -10,7 +10,7 @@ import { useTheme } from "@/context/theme-provider.jsx";
 
 function Dashboard() {
   const { theme } = useTheme();
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, logout } = useContext(AuthContext);
 
   const isDark =
     theme === "dark" ||
@@ -22,8 +22,18 @@ function Dashboard() {
       <section className="relative overflow-hidden bg-[#F4F1EC] text-[#1E1A2F] dark:bg-[#14112B] dark:text-[#F1ECFA]">
         <div className="pointer-events-none absolute -bottom-[120px] -left-[80px] h-[420px] w-[420px] rounded-full bg-[#A99BD1] opacity-60 blur-[70px] dark:bg-[#7E70B5] dark:opacity-[0.18]" />
 
-        <div className="absolute top-4 right-4 z-20 md:top-6 md:right-8 [&_button]:border-transparent [&_button]:bg-[#F4F1EC] dark:[&_button]:bg-[#14112B]">
+        <div className="absolute top-4 right-4 z-20 flex items-center gap-3 md:top-6 md:right-8 [&_button]:border-transparent [&_button]:bg-[#F4F1EC] dark:[&_button]:bg-[#14112B]">
           <ThemeToggle />
+
+          {isLoggedIn && (
+            <button
+              type="button"
+              onClick={logout}
+              className="font-body text-xs font-medium text-[#6F6A86] transition-colors hover:text-[#6A59C4] dark:text-[#9C94BC] dark:hover:text-[#C2B3E4]"
+            >
+              Sign out
+            </button>
+          )}
         </div>
 
         <div className="relative mx-auto flex min-h-dvh max-w-360 flex-col items-center justify-center gap-10 px-5 pt-3 pb-5 lg:grid lg:grid-cols-[240px_780px_1fr] lg:items-start lg:gap-0 lg:px-10 lg:py-0 lg:content-center">

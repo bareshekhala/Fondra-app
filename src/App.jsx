@@ -11,6 +11,7 @@ import MyCollectionPage from "@/pages/MyCollectionPage.jsx";
 import UnplantedPage from "@/pages/UnplantedPage.jsx";
 import CirclePage from "@/pages/CirclePage.jsx";
 import OnlyPrivate from "@/components/auth/OnlyPrivate.jsx";
+import NoAccount from "@/components/auth/NoAccount.jsx";
 import { Toaster } from "@/components/ui/toast.jsx";
 function App() {
 
@@ -20,8 +21,8 @@ function App() {
      <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/howitworks" element={<HowItWorksPage />} />
-            <Route path="/signup" element={<SignUpPage />} />
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={ <NoAccount><SignUpPage /></NoAccount> } />
+            <Route path="/login" element={ <NoAccount><LoginPage /></NoAccount> } />
             <Route path="/dashboard" element={ <OnlyPrivate><UserDashboardPage /></OnlyPrivate> } />
             <Route path="/profile" element={ <OnlyPrivate><ProfilePage /></OnlyPrivate> } />
             <Route path="/garden" element={ <OnlyPrivate><GardenPage /></OnlyPrivate> } />

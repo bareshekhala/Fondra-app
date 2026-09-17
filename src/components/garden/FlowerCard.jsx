@@ -180,7 +180,7 @@ function FlowerCard({ flower, variant = "collection", onChanged }) {
                 </AlertDialogTitle>
 
                 <AlertDialogDescription>
-                  Plant it in your garden for everyone to see, or keep it in
+                  Plant it in your garden or keep it in
                   your collection without it growing on the plot. Either way
                   it stays yours.
                 </AlertDialogDescription>

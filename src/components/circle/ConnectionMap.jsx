@@ -68,7 +68,7 @@ function ConnectionMap({ circle = [], onRefreshLocation }) {
         projectionConfig={{ scale: SCALE, center: CENTER }}
         width={WIDTH}
         height={HEIGHT}
-        className="min-h-0 w-full flex-1"
+        className="min-h-0 w-full max-w-full flex-1"
         role="img"
       >
         <defs>

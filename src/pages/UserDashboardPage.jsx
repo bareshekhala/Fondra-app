@@ -103,7 +103,7 @@ function UserDashboardPage() {
         </header>
 
         <div className="grid gap-6 md:grid-cols-12">
-          <div className="md:col-span-8">
+          <div className="min-w-0 md:col-span-8">
             <ConnectionMap
               circle={circle}
               onRefreshLocation={refreshLocation}

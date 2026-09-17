@@ -39,16 +39,19 @@ function HowItWorksPage() {
           How it Works?
         </h1>
 
-        <div className="relative grid grid-cols-1 md:grid-cols-3 flex-1 gap-6 md:gap-18 mt-4">
+        <div className="relative mx-auto grid w-full max-w-6xl grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 mt-4">
           <div
             className="pointer-events-none absolute left-[8%] right-[8%] top-18 hidden h-px
               bg-linear-to-r from-transparent via-[#B7ACD3]/60 to-transparent md:block"
           />
 
           <ParallaxFeature
-            className="relative flex flex-row md:flex-col items-center justify-center text-left md:text-center gap-6 md:gap-4"
-            image={img1}
-            imageClassName="w-25 md:w-35 shrink-0"
+            className="relative flex flex-row md:flex-col items-center md:items-stretch justify-center md:justify-start text-left md:text-center gap-6 md:gap-4"
+            imageContent={
+              <div className="flex h-28 w-28 shrink-0 items-end justify-center md:h-36 md:w-full">
+                <img src={img1} alt="" className="max-h-full w-auto max-w-full object-contain" />
+              </div>
+            }
             heading="You tap"
           >
             <span className="not-italic font-body text-base leading-relaxed max-w-[34ch] block">
@@ -58,9 +61,12 @@ function HowItWorksPage() {
           </ParallaxFeature>
 
           <ParallaxFeature
-            className="relative flex flex-row md:flex-col items-center justify-center text-left md:text-center gap-6 md:gap-4"
-            image={avatar}
-            imageClassName="w-35 md:w-75 shrink-0"
+            className="relative flex flex-row md:flex-col items-center md:items-stretch justify-center md:justify-start text-left md:text-center gap-6 md:gap-4"
+            imageContent={
+              <div className="flex h-28 w-28 shrink-0 items-end justify-center md:h-36 md:w-full">
+                <img src={avatar} alt="" className="max-h-full w-auto max-w-full object-contain md:max-h-20" />
+              </div>
+            }
             heading="They see it"
           >
             <span className="not-italic font-body text-base leading-relaxed max-w-[34ch] block">
@@ -70,9 +76,12 @@ function HowItWorksPage() {
           </ParallaxFeature>
 
           <ParallaxFeature
-            className="relative flex flex-row md:flex-col items-center justify-center text-left md:text-center gap-6 md:gap-4"
-            image={sunFlower}
-            imageClassName="h-25 w-25 md:h-33 md:w-35 shrink-0"
+            className="relative flex flex-row md:flex-col items-center md:items-stretch justify-center md:justify-start text-left md:text-center gap-6 md:gap-4"
+            imageContent={
+              <div className="flex h-28 w-28 shrink-0 items-end justify-center md:h-36 md:w-full">
+                <img src={sunFlower} alt="" className="max-h-full w-auto max-w-full object-contain" />
+              </div>
+            }
             heading="Quiet gets a nudge"
           >
             <span className="not-italic font-body text-base leading-relaxed max-w-[34ch] block">
@@ -91,10 +100,10 @@ function HowItWorksPage() {
         <div
           id="the-garden"
           className="
-            flex flex-col md:flex-row w-full
+            mx-auto flex w-full max-w-7xl flex-col md:flex-row md:items-center gap-10
             bg-[#F4F1EC] dark:bg-[#14112B]
             text-[#1E1A2F] dark:text-[#F1ECFA]
-            px-10 py-10
+            px-5 md:px-10 py-10
           "
         >
           <div className="flex flex-col md:w-1/2 justify-center items-center gap-5 md:gap-10">
@@ -169,14 +178,14 @@ function HowItWorksPage() {
             </p>
           </div>
 
-          <div className="md:w-1/2 flex justify-center items-center mt-20 md:mt-0">
-            <div className="relative inline-block">
+          <div className="md:w-1/2 flex justify-center items-center mt-10 md:mt-0">
+            <div className="relative w-full max-w-[680px]">
               <img
                 src={isDark ? gardenN : gardenD}
-                className="w-full md:w-170 md:mt-10 h-auto rounded-3xl md:drop-shadow-xl/40"
+                className="w-full h-auto rounded-3xl md:drop-shadow-xl/40"
               />
 
-              <div className="absolute top-15 md:top-1/2 left-20 md:left-48 -translate-x-1/2 -translate-y-1/2">
+              <div className="absolute left-[28%] top-[42%] md:top-1/2 -translate-x-1/2 -translate-y-1/2">
                 <div
                   className="glass-card flex flex-row items-center rounded-full pr-3"
                 >
@@ -219,15 +228,18 @@ function HowItWorksPage() {
           px-5 py-10 md:px-10 md:py-10
         "
       >
-        <h1 className="text-center text-4xl md:text-5xl md:mt-30 text-[#1E1A2F] dark:text-[#F1ECFA]">
+        <h1 className="text-center text-4xl md:text-5xl md:mt-16 text-[#1E1A2F] dark:text-[#F1ECFA]">
           Who ends up using it?
         </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-8 md:gap-20 md:mt-30">
+        <div className="mx-auto grid w-full max-w-6xl grid-cols-1 md:grid-cols-3 gap-10 mt-8 md:gap-10 md:mt-16">
           <ParallaxFeature
-            className="flex flex-row md:flex-col items-center md:justify-center text-left md:text-center gap-5"
-            image={tulip}
-            imageClassName="h-25 w-25 md:h-33 md:w-33 shrink-0"
+            className="flex flex-row md:flex-col items-center md:items-stretch md:justify-start text-left md:text-center gap-5"
+            imageContent={
+              <div className="flex h-28 w-28 shrink-0 items-end justify-center md:h-36 md:w-full">
+                <img src={tulip} alt="" className="max-h-full w-auto max-w-full object-contain" />
+              </div>
+            }
             heading="Families with someone living alone"
           >
             <span className="not-italic font-body text-base leading-relaxed max-w-[34ch] block">
@@ -237,9 +249,12 @@ function HowItWorksPage() {
           </ParallaxFeature>
 
           <ParallaxFeature
-            className="flex flex-row md:flex-col items-center md:justify-center text-left md:text-center gap-5"
-            image={fern}
-            imageClassName="h-25 w-25 md:h-33 md:w-33 shrink-0"
+            className="flex flex-row md:flex-col items-center md:items-stretch md:justify-start text-left md:text-center gap-5"
+            imageContent={
+              <div className="flex h-28 w-28 shrink-0 items-end justify-center md:h-36 md:w-full">
+                <img src={fern} alt="" className="max-h-full w-auto max-w-full object-contain" />
+              </div>
+            }
             heading="People who live far from home"
           >
             <span className="not-italic font-body text-base leading-relaxed max-w-[34ch] block">
@@ -249,9 +264,12 @@ function HowItWorksPage() {
           </ParallaxFeature>
 
           <ParallaxFeature
-            className="flex flex-row md:flex-col items-center md:justify-center text-left md:text-center gap-5"
-            image={daisy}
-            imageClassName="h-25 w-25 md:h-33 md:w-33 shrink-0"
+            className="flex flex-row md:flex-col items-center md:items-stretch md:justify-start text-left md:text-center gap-5"
+            imageContent={
+              <div className="flex h-28 w-28 shrink-0 items-end justify-center md:h-36 md:w-full">
+                <img src={daisy} alt="" className="max-h-full w-auto max-w-full object-contain" />
+              </div>
+            }
             heading="People who've drifted apart"
           >
             <span className="not-italic font-body text-base leading-relaxed max-w-[34ch] block">

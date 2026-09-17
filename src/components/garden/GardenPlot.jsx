@@ -38,7 +38,7 @@ function GardenPlot({ flowers }) {
       ))}
 
       {growing.length === 0 && (
-        <p className="absolute left-1/2 top-[42%] -translate-x-1/2 text-center font-display text-[22px] italic text-[#1E1A2F] dark:text-foreground">
+        <p className="absolute left-1/2 top-[22%] -translate-x-1/2 text-center font-display text-[22px] italic text-[#1E1A2F] dark:text-foreground">
           {flowers.length === 0
             ? "Nothing planted yet."
             : "Your plot is empty."}

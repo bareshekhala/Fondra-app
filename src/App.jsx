@@ -10,6 +10,7 @@ import GardenPage from "@/pages/GardenPage.jsx";
 import MyCollectionPage from "@/pages/MyCollectionPage.jsx";
 import UnplantedPage from "@/pages/UnplantedPage.jsx";
 import CirclePage from "@/pages/CirclePage.jsx";
+import NotFoundPage from "@/pages/NotFoundPage.jsx";
 import OnlyPrivate from "@/components/auth/OnlyPrivate.jsx";
 import NoAccount from "@/components/auth/NoAccount.jsx";
 import { Toaster } from "@/components/ui/toast.jsx";
@@ -29,6 +30,7 @@ function App() {
             <Route path="/garden/collection" element={ <OnlyPrivate><MyCollectionPage /></OnlyPrivate> } />
             <Route path="/garden/unplanted" element={ <OnlyPrivate><UnplantedPage /></OnlyPrivate> } />
             <Route path="/circle" element={ <OnlyPrivate><CirclePage /></OnlyPrivate> } />
+            <Route path="*" element={<NotFoundPage />} />
             </Routes>
             <Toaster />
             </div>

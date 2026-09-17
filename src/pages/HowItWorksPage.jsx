@@ -35,13 +35,13 @@ function HowItWorksPage() {
           w-full min-h-screen px-5 md:px-10 py-10 md:py-12
         "
       >
-        <h1 className="text-center text-4xl md:text-5xl mt-5 md:mt-10 text-[#1E1A2F] dark:text-[#F1ECFA]">
+        <h1 className="text-center text-4xl md:text-5xl mt-5 md:mt-20 text-[#1E1A2F] dark:text-[#F1ECFA]">
           How it Works?
         </h1>
 
-        <div className="relative mx-auto grid w-full max-w-6xl grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 mt-4">
+        <div className="relative mx-auto grid w-full max-w-6xl grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 mt-4 md:my-auto md:pt-28 md:pb-16">
           <div
-            className="pointer-events-none absolute left-[8%] right-[8%] top-18 hidden h-px
+            className="pointer-events-none absolute left-[8%] right-[8%] top-14 hidden h-px
               bg-linear-to-r from-transparent via-[#B7ACD3]/60 to-transparent md:block"
           />
 

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import service from "@/services/index.service.js";
@@ -32,6 +32,21 @@ function ProfilePage() {
   const [busy, setBusy] = useState(false);
   const [removeOpen, setRemoveOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const [zoom, setZoom] = useState(localStorage.getItem("fondra-zoom") || "1");
+
+  const zoomVal = [
+    ["1", "Normal"],
+    ["1.2", "Bigger"],
+  ];
+
+  const handleZoom = (value) => {
+    localStorage.setItem("fondra-zoom", value);
+    setZoom(value);
+  };
+
+  useEffect(() => {
+    document.documentElement.style.zoom = zoom;
+  }, [zoom]);
 const [name, setName] = useState(user ? user.name : "")
 
 //for profile picture -> post
@@ -252,6 +267,33 @@ const [name, setName] = useState(user ? user.name : "")
               {name.length} / 40
             </p>
           </form>
+        </section>
+
+        <section className="glass-card mt-4 px-6 py-6">
+          <h2 className="font-display text-xl text-[#1E1A2F] dark:text-foreground">
+            Hard to see?
+          </h2>
+
+          <p className="mt-1 text-xs font-medium text-muted-foreground dark:text-[#9C92C4]">
+            Make everything in Fondra bigger so it's easier to read. It stays that way until you change it back.
+          </p>
+
+          <div className="mt-4 flex gap-2">
+            {zoomVal.map(([value, label]) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => handleZoom(value)}
+                className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+                  zoom === value
+                    ? "bg-[#7C6BD4] text-white dark:bg-[#A38DF0] dark:text-[#1D1739]"
+                    : "border border-[#7C6BD4]/40 text-[#7C6BD4] hover:bg-[#7C6BD4]/10 dark:border-[#A38DF0]/40 dark:text-[#A38DF0]"
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
         </section>
 
         <section className="glass-card mt-4 px-6 py-6">

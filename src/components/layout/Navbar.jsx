@@ -44,13 +44,6 @@ function Navbar() {
 
             <div className="font-body flex items-center gap-8 text-[15px] font-medium">
               <Link
-                to="/about"
-                className="text-[#1E1A2F]/80 dark:text-[#CFC6E6] transition-colors hover:text-[#6A59C4] dark:hover:text-[#F2C3D5]"
-              >
-                About
-              </Link>
-
-              <Link
                 to="/signup"
                 className="text-[#1E1A2F]/80 dark:text-[#CFC6E6] transition-colors hover:text-[#6A59C4] dark:hover:text-[#F2C3D5]"
               >
@@ -102,13 +95,6 @@ function Navbar() {
                   sideOffset={10}
                   className="w-44 rounded-2xl border border-white/60 dark:border-white/15 bg-white/90 dark:bg-[#211B3D]/95 backdrop-blur-lg p-1.5"
                 >
-                  <DropdownMenuItem
-                    render={<Link to="/about" />}
-                    className="font-body block w-full rounded-xl px-3 py-2.5 text-[15px] font-medium cursor-pointer text-[#1E1A2F] dark:text-foreground focus:bg-background dark:focus:bg-white/10"
-                  >
-                    About
-                  </DropdownMenuItem>
-
                   <DropdownMenuItem
                     render={<Link to="/signup" />}
                     className="font-body block w-full rounded-xl px-3 py-2.5 text-[15px] font-medium cursor-pointer text-[#1E1A2F] dark:text-foreground focus:bg-background dark:focus:bg-white/10"

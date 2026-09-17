@@ -38,6 +38,10 @@ export function ThemeProvider({
     root.classList.add(theme)
   }, [theme])
 
+  useEffect(() => {
+    document.documentElement.style.zoom = localStorage.getItem("fondra-zoom") || "1"
+  }, [])
+
   const value = {
     theme,
     setTheme: (theme) => {

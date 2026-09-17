@@ -191,6 +191,26 @@ function HowItWorksPage() {
         </div>
       </div>
 
+      <div className="font-display text-[#4A4462] dark:text-[#C2B3E4] bg-[#F4F1EC] dark:bg-[#14112B] px-5 py-16 md:px-10 md:py-24 ">
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-12 text-center">
+          <h2 className="text-4xl md:text-5xl text-[#1E1A2F] dark:text-[#F1ECFA]">
+            Hard to see?
+          </h2>
+
+          <div className="glass-card flex items-end gap-3 px-8 py-6">
+            <span className="font-display text-7xl text-[#1E1A2F] dark:text-[#F1ECFA]">Aa</span>
+            <span className="font-display text-9xl text-[#7C6BD4] dark:text-[#A38DF0]">Aa</span>
+          </div>
+
+          <p className="font-body text-xl leading-relaxed max-w-[42ch]">
+            One tap in your profile makes everything in Fondra bigger: the text,
+            the buttons, the map, the garden.
+            <br />
+            It stays that way until you change it back.
+          </p>
+        </div>
+      </div>
+
       <div
         className="
           min-h-screen font-display

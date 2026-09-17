@@ -4,6 +4,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  --breakpoint-desk: 90rem;
+
   --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
   --font-display: "Fraunces", Georgia, serif;
   --font-body: "Geist", ui-sans-serif, system-ui, sans-serif;

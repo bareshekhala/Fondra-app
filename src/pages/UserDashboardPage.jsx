@@ -102,27 +102,27 @@ function UserDashboardPage() {
           </p>
         </header>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-12">
-          <div className="min-w-0 md:col-span-8">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-12">
+          <div className="min-w-0 md:col-span-2 lg:col-span-8">
             <ConnectionMap
               circle={circle}
               onRefreshLocation={refreshLocation}
             />
           </div>
 
-          <div className="md:col-span-4">
+          <div className="md:col-span-1 lg:col-span-4">
             <CheckInCard />
           </div>
 
-          <div className="md:col-span-5">
+          <div className="md:col-span-1 lg:col-span-5">
             <CircleCard circle={circle} />
           </div>
 
-          <div className="md:col-span-4">
+          <div className="md:col-span-1 lg:col-span-4">
             <GardenPeekCard flowers={garden} unplanted={unplanted} />
           </div>
 
-          <div className="md:col-span-3">
+          <div className="md:col-span-1 lg:col-span-3">
             <NotificationsCard notifications={notifications} unread={unread} />
           </div>
         </div>

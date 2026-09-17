@@ -1,4 +1,3 @@
-// A tap that travels outward — the app's own gesture, not a generic bell.
 function PokeMark({ size = 13, className = "" }) {
   return (
     <svg viewBox="0 0 24 24" width={size} height={size} fill="none" className={className} aria-hidden="true">

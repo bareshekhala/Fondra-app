@@ -5,6 +5,7 @@ import SignUpPage from "@/pages/SignUpPage.jsx";
 import LoginPage from "@/pages/LoginPage.jsx";
 import UserDashboardPage from "@/pages/UserDashboardPage.jsx";
 import ProfilePage from "@/pages/ProfilePage.jsx";
+import HowItWorksPage from "@/pages/HowItWorksPage.jsx";
 import GardenPage from "@/pages/GardenPage.jsx";
 import MyCollectionPage from "@/pages/MyCollectionPage.jsx";
 import UnplantedPage from "@/pages/UnplantedPage.jsx";
@@ -18,6 +19,7 @@ function App() {
     <div>
      <Routes>
             <Route path="/" element={<LandingPage />} />
+            <Route path="/howitworks" element={<HowItWorksPage />} />
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/dashboard" element={ <OnlyPrivate><UserDashboardPage /></OnlyPrivate> } />

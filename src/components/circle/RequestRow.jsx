@@ -54,11 +54,11 @@ function RequestRow({ request, onChanged }) {
       <Avatar user={otherUser} size={44} />
 
       <div className="min-w-0 flex-1">
-        <p className="truncate text-sm font-bold text-[#211B3D] dark:text-foreground">
+        <p className="truncate text-sm font-bold text-[#1E1A2F] dark:text-foreground">
           {otherUser.name}
         </p>
 
-        <p className="truncate text-xs font-medium text-muted-foreground dark:text-[#9C92C4]">
+        <p className="truncate text-xs font-medium text-muted-foreground dark:text-[#9C94BC]">
           @{otherUser.username} · wants to be in your circle
         </p>
       </div>
@@ -67,7 +67,7 @@ function RequestRow({ request, onChanged }) {
         type="button"
         onClick={handleDecline}
         disabled={busy}
-        className="shrink-0 rounded-full border border-black/8 px-3.5 py-2 text-xs font-bold text-[#453D6B] transition hover:bg-black/2 disabled:opacity-50 dark:border-white/15 dark:text-[#C6BCE6] dark:hover:bg-white/5"
+        className="shrink-0 rounded-full border border-black/8 px-3.5 py-2 text-xs font-bold text-[#4A4462] transition hover:bg-black/2 disabled:opacity-50 dark:border-white/15 dark:text-[#CFC6E6] dark:hover:bg-white/5"
       >
         Decline
       </button>

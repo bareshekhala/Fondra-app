@@ -6,14 +6,14 @@ function Footer() {
         className="
         flex
         flex-col
-    font-serif
-    bg-background
-    dark:bg-[#140F2E]
+    font-body
+    bg-[#F4F1EC]
+    dark:bg-[#14112B]
     border-t
-    border-[#E4DBF4]
+    border-[#E3DDD5]
     dark:border-white/10
-    text-[#453D6B]
-    dark:text-[#C2B3E4]
+    text-[#4A4462]
+    dark:text-[#CFC6E6]
     px-6
     md:px-10
     py-10
@@ -36,10 +36,11 @@ function Footer() {
           <div className="pl-10">
             <h1
               className="
+          font-wordmark
           text-2xl
           md:text-3xl
-          text-[#211B3D]
-          dark:text-foreground
+          text-[#1E1A2F]
+          dark:text-[#F1ECFA]
         "
             >
               Fondra
@@ -52,7 +53,7 @@ function Footer() {
           </div>
 
           <div>
-            <h2 className="font-bold text-base md:text-lg text-[#211B3D] dark:text-foreground">
+            <h2 className="font-display text-base md:text-lg text-[#1E1A2F] dark:text-[#F1ECFA]">
               The app
             </h2>
 
@@ -64,18 +65,18 @@ function Footer() {
           </div>
 
           <div>
-            <h2 className="font-bold text-base md:text-lg text-[#211B3D] dark:text-foreground">
+            <h2 className="font-display text-base md:text-lg text-[#1E1A2F] dark:text-[#F1ECFA]">
               Your account
             </h2>
 
             <div className="flex flex-col gap-3 mt-4 text-sm md:text-base">
-              <a to="/login">Sign in</a>
+              <Link to="/login">Sign in</Link>
               <Link to="/signup">Create an account</Link>
             </div>
           </div>
 
           <div>
-            <h2 className="font-bold text-base md:text-lg text-[#211B3D] dark:text-foreground">
+            <h2 className="font-display text-base md:text-lg text-[#1E1A2F] dark:text-[#F1ECFA]">
               About{" "}
             </h2>
 
@@ -89,8 +90,8 @@ function Footer() {
         <div
           className="
       border-t
-      border-[#C2B3E4]
-      dark:border-[#453D6B]
+      border-[#E3DDD5]
+      dark:border-white/10
       pt-6
       flex
       flex-col

@@ -78,18 +78,6 @@ function CheckInCard() {
   };
 
 
-  const firstName = user.name.split(" ")[0];
-
-  const hour = new Date().getHours();
-  let greeting = `Good evening, ${firstName}`;
-  if (hour < 5) {
-    greeting = `Still up, ${firstName}?`;
-  } else if (hour < 12) {
-    greeting = `Good morning, ${firstName}`;
-  } else if (hour < 18) {
-    greeting = `Good afternoon, ${firstName}`;
-  }
-
 
   let lastCheckIn = "no check-ins yet";
   let doneToday = false;
@@ -105,9 +93,7 @@ function CheckInCard() {
     <>
       <section className="glass-card px-6 py-8 text-center md:py-10">
 
-        <p className="text-sm font-medium text-muted-foreground dark:text-[#9C92C4]">
-          {greeting}
-        </p>
+        <p className="auth-eyebrow">Today</p>
 
         <button
           type="button"
@@ -139,11 +125,11 @@ function CheckInCard() {
         </button>
 
 
-        <h1 className="mt-5 font-serif text-3xl italic text-[#211B3D] dark:text-foreground">
+        <h1 className="mt-5 font-display text-3xl text-[#1E1A2F] dark:text-[#F1ECFA]">
           {doneToday ? "Still here." : "Ready when you are"}
         </h1>
 
-        <p className="mt-1 text-sm font-medium text-[#453D6B] dark:text-[#C6BCE6]">
+        <p className="mt-1 text-sm font-medium text-[#4A4462] dark:text-[#CFC6E6]">
           {doneToday
             ? `Checked in ${lastCheckIn}.`
             : "One tap. Nothing to write unless you want to."}
@@ -151,9 +137,16 @@ function CheckInCard() {
 
         {doneToday && todayLast && (
           <div className="mx-auto mt-4 max-w-xs rounded-2xl bg-background px-4 py-3 text-left dark:bg-white/8">
-            <p className="text-xs font-bold text-muted-foreground dark:text-[#9C92C4]">
+            <p className="text-xs font-bold text-muted-foreground dark:text-[#9C94BC]">
               {todayLast.mood}
             </p>
+
+            {todayLast.watchOut && (
+              <p className="mt-1 text-xs font-bold text-[#3E6B4E] dark:text-[#9CC7AA]">
+                Watch over me
+                {todayLast.watchOutAt && ` · until ${format(new Date(todayLast.watchOutAt), "HH:mm")}`}
+              </p>
+            )}
 
             <NoteActions
               key={`note-${todayLast._id}`}
@@ -178,7 +171,7 @@ function CheckInCard() {
           {doneToday ? "Check in again" : "Check in"}
         </button>
 
-        <p className="mt-3 text-xs text-muted-foreground dark:text-[#9C92C4]">
+        <p className="mt-3 text-xs text-muted-foreground dark:text-[#9C94BC]">
           You can check in 5 times a day
           {todayCount !== null && ` · ${todayCount} used today`}
         </p>

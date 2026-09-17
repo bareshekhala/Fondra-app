@@ -62,16 +62,16 @@ function CirclePage() {
 
 
   return (
-    <div className="min-h-screen bg-background dark:bg-[#1D1739]">
+    <div className="font-body min-h-screen bg-[#F4F1EC] dark:bg-[#14112B]">
       <Navbar />
 
       <div className="mx-auto w-full max-w-2xl px-5 pt-20 pb-28 md:pt-24 md:pb-14">
 
-        <h1 className="font-serif text-3xl italic text-[#211B3D] dark:text-foreground">
+        <h1 className="font-display text-3xl text-[#1E1A2F] dark:text-foreground">
           Your circle
         </h1>
 
-        <p className="mt-1 text-sm font-medium text-muted-foreground dark:text-[#9C92C4]">
+        <p className="mt-1 text-sm font-medium text-muted-foreground dark:text-[#9C94BC]">
           The people who'd notice if you went quiet. You can poke each of them
           up to 5 times a day, and once an hour while they haven't answered.
         </p>
@@ -84,15 +84,15 @@ function CirclePage() {
               onClick={() => setTab(t.key)}
               className={`relative rounded-full px-4 py-2 text-[13px] font-bold transition ${
                 tab === t.key
-                  ? "bg-white text-[#211B3D] shadow-[0_2px_8px_rgba(33,27,61,0.08)] dark:bg-[#2A2148] dark:text-foreground"
-                  : "text-muted-foreground hover:text-[#211B3D] dark:text-[#9C92C4] dark:hover:text-foreground"
+                  ? "bg-white text-[#1E1A2F] shadow-[0_2px_8px_rgba(33,27,61,0.08)] dark:bg-[#1E1A3A] dark:text-foreground"
+                  : "text-muted-foreground hover:text-[#1E1A2F] dark:text-[#9C94BC] dark:hover:text-foreground"
               }`}
             >
               {t.label}
               <span className="ml-1.5 font-medium">{t.count}</span>
 
               {t.key === "requests" && requests.length > 0 && (
-                <span className="absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-[#D9709A]" />
+                <span className="absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-[#F1D48A]" />
               )}
             </button>
           ))}
@@ -104,7 +104,7 @@ function CirclePage() {
         {tab === "circle" && (
           <div className="glass-card mt-3 px-5">
             {circle.length === 0 ? (
-              <p className="py-10 text-center text-sm text-muted-foreground dark:text-[#9C92C4]">
+              <p className="py-10 text-center text-sm text-muted-foreground dark:text-[#9C94BC]">
                 Nobody here yet. Find someone below, or share your invite link.
               </p>
             ) : (
@@ -127,7 +127,7 @@ function CirclePage() {
         {tab === "requests" && (
           <div className="glass-card mt-3 px-5">
             {requests.length === 0 ? (
-              <p className="py-10 text-center text-sm text-muted-foreground dark:text-[#9C92C4]">
+              <p className="py-10 text-center text-sm text-muted-foreground dark:text-[#9C94BC]">
                 No one is waiting for your answer.
               </p>
             ) : (
@@ -150,7 +150,7 @@ function CirclePage() {
         {tab === "sent" && (
           <div className="glass-card mt-3 px-5">
             {sent.length === 0 ? (
-              <p className="py-10 text-center text-sm text-muted-foreground dark:text-[#9C92C4]">
+              <p className="py-10 text-center text-sm text-muted-foreground dark:text-[#9C94BC]">
                 You haven't sent any requests.
               </p>
             ) : (

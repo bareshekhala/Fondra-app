@@ -1,7 +1,6 @@
 //from motion
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
 const ENTRANCE_X = {
   left: -120,
@@ -18,21 +17,8 @@ function ParallaxFeature({
   imageFrom = "none",
   imageContent,
 }) {
-  const ref = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-
-  const parallaxY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [40, -40]
-  );
-
   return (
-    <div ref={ref} className={className}>
+    <div className={className}>
 
       {/* Image */}
       <motion.div
@@ -52,7 +38,6 @@ function ParallaxFeature({
           duration: 0.7,
           ease: "easeOut",
         }}
-        style={{ y: parallaxY }}
         className="shrink-0"
       >
         {imageContent ? (

@@ -103,11 +103,11 @@ function SocialActions({ checkInId, savedSocial }) {
 
       {social ? (
         <p className="min-w-0 text-sm">
-          <span className="block text-[11px] font-bold text-muted-foreground dark:text-[#9C92C4]">
+          <span className="block text-[11px] font-bold text-muted-foreground dark:text-[#9C94BC]">
             Social energy
           </span>
 
-          <span className="font-bold text-[#7C6BD4] dark:text-[#A38DF0]">
+          <span className="font-bold text-[#6A59C4] dark:text-[#C2B3E4]">
             {social}
           </span>
         </p>

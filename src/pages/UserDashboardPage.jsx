@@ -87,17 +87,17 @@ function UserDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background dark:bg-[#1D1739]">
+    <div className="font-body min-h-screen bg-[#F4F1EC] dark:bg-[#14112B]">
       <Navbar />
 
       <div className="mx-auto w-full max-w-2xl px-5 pt-20 pb-28 md:max-w-6xl md:px-8 md:pt-24 md:pb-14">
         <header className="mb-6">
-          <h1 className="font-serif text-4xl text-[#211B3D] dark:text-foreground md:text-5xl">
+          <h1 className="font-display text-4xl text-[#1E1A2F] dark:text-[#F1ECFA] md:text-[40px]">
             {greeting}, <span className="italic">{firstName}</span>
             {hour < 5 ? "?" : ""}
           </h1>
 
-          <p className="mt-2 text-sm font-medium text-muted-foreground dark:text-[#9C92C4]">
+          <p className="mt-2 text-sm font-medium text-muted-foreground dark:text-[#9C94BC]">
             Your people are around you. You don't have to say much.
           </p>
         </header>

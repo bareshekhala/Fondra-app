@@ -32,8 +32,8 @@ const SocialLevels = [
               transition
               ${
                 selected
-                  ? "border-[#7C6BD4] bg-[#7C6BD4]/10 text-[#211B3D] dark:border-[#A38DF0] dark:bg-white/10 dark:text-foreground"
-                  : "border-black/8 text-[#453D6B] hover:bg-black/2 dark:border-white/12 dark:text-[#C6BCE6] dark:hover:bg-white/5"
+                  ? "border-[#7C6BD4] bg-[#7C6BD4]/10 text-[#1E1A2F] dark:border-[#A38DF0] dark:bg-white/10 dark:text-foreground"
+                  : "border-black/8 text-[#4A4462] hover:bg-black/2 dark:border-white/12 dark:text-[#CFC6E6] dark:hover:bg-white/5"
               }
             `}
           >

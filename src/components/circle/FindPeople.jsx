@@ -87,27 +87,27 @@ function FindPeople({ circle, requests, sent, onChanged }) {
   return (
 
     <section className="glass-card p-5">
-      <h2 className="font-serif text-2xl italic text-[#211B3D] dark:text-foreground">
+      <h2 className="font-display text-2xl text-[#1E1A2F] dark:text-foreground">
         Find people
       </h2>
 
       <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center">
         <label className="flex flex-1 items-center gap-2.5 rounded-full border border-black/8 bg-white px-4 py-3 dark:border-white/12 dark:bg-white/5">
-          <Search size={16} className="shrink-0 text-muted-foreground dark:text-[#9C92C4]" />
+          <Search size={16} className="shrink-0 text-muted-foreground dark:text-[#9C94BC]" />
 
           <input
             type="text"
             value={query}
             onChange={handleQueryChange}
             placeholder="Username or email"
-            className="w-full bg-transparent text-[15px] font-medium text-[#211B3D] outline-none placeholder:text-muted-foreground dark:text-foreground dark:placeholder:text-[#9C92C4]"
+            className="w-full bg-transparent text-[15px] font-medium text-[#1E1A2F] outline-none placeholder:text-muted-foreground dark:text-foreground dark:placeholder:text-[#9C92C4]"
           />
         </label>
 
         <button
           type="button"
           onClick={handleCopyInvite}
-          className="flex shrink-0 items-center justify-center gap-2 rounded-full border border-dashed border-[#7C6BD4]/40 px-4 py-3 text-xs font-bold text-[#7C6BD4] transition hover:bg-[#7C6BD4]/5 dark:border-[#A38DF0]/40 dark:text-[#A38DF0] dark:hover:bg-white/5"
+          className="flex shrink-0 items-center justify-center gap-2 rounded-full border border-dashed border-[#7C6BD4]/40 px-4 py-3 text-xs font-bold text-[#6A59C4] transition hover:bg-[#7C6BD4]/5 dark:border-[#A38DF0]/40 dark:text-[#C2B3E4] dark:hover:bg-white/5"
         >
           <Copy size={14} />
           Copy invite code
@@ -125,11 +125,11 @@ function FindPeople({ circle, requests, sent, onChanged }) {
                 <Avatar user={otherUser} size={44} />
 
                 <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-bold text-[#211B3D] dark:text-foreground">
+                  <p className="truncate text-sm font-bold text-[#1E1A2F] dark:text-foreground">
                     {otherUser.name}
                   </p>
 
-                  <p className="truncate text-xs font-medium text-muted-foreground dark:text-[#9C92C4]">
+                  <p className="truncate text-xs font-medium text-muted-foreground dark:text-[#9C94BC]">
                     @{otherUser.username}
                     {relation === "circle" ? " · already in your circle" : null}
                     {relation === "sent" ? " · request sent" : null}
@@ -147,7 +147,7 @@ function FindPeople({ circle, requests, sent, onChanged }) {
                     Add to circle
                   </button>
                 ) : (
-                  <span className="shrink-0 rounded-full border border-black/8 px-3.5 py-2 text-xs font-bold text-muted-foreground dark:border-white/15 dark:text-[#9C92C4]">
+                  <span className="shrink-0 rounded-full border border-black/8 px-3.5 py-2 text-xs font-bold text-muted-foreground dark:border-white/15 dark:text-[#9C94BC]">
                     {relation === "circle" ? "In circle" : null}
                     {relation === "sent" ? "Pending" : null}
                     {relation === "received" ? "See requests" : null}
@@ -160,12 +160,12 @@ function FindPeople({ circle, requests, sent, onChanged }) {
       ) : null}
 
       {query.trim().length >= 2 && results.length === 0 ? (
-        <p className="mt-3 text-sm text-muted-foreground dark:text-[#9C92C4]">
+        <p className="mt-3 text-sm text-muted-foreground dark:text-[#9C94BC]">
           Nobody with that name yet 
         </p>
       ) : null}
 
-      <p className="mt-3 text-xs text-muted-foreground dark:text-[#9C92C4]">
+      <p className="mt-3 text-xs text-muted-foreground dark:text-[#9C94BC]">
         Type at least 2 letters. Or copy your invite code: anyone who signs up
         with it lands straight in your circle.
       </p>

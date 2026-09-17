@@ -38,30 +38,30 @@ function UnplantedPage() {
 
 
   return (
-    <div className="min-h-screen bg-background dark:bg-[#1D1739]">
+    <div className="font-body min-h-screen bg-[#F4F1EC] dark:bg-[#14112B]">
       <Navbar />
 
       <div className="mx-auto w-full max-w-4xl px-5 pt-20 pb-28 md:pt-24 md:pb-14">
 
         <Link
           to="/garden"
-          className="text-sm font-medium text-muted-foreground dark:text-[#9C92C4]"
+          className="text-sm font-medium text-muted-foreground dark:text-[#9C94BC]"
         >
           ← Back to the garden
         </Link>
 
-        <h1 className="mt-3 font-serif text-3xl italic text-[#211B3D] dark:text-foreground">
+        <h1 className="mt-3 font-display text-3xl text-[#1E1A2F] dark:text-foreground">
           Unplanted flowers
         </h1>
 
-        <p className="mt-1 text-sm font-medium text-muted-foreground dark:text-[#9C92C4]">
+        <p className="mt-1 text-sm font-medium text-muted-foreground dark:text-[#9C94BC]">
           {pokes.length} {pokes.length === 1 ? "flower" : "flowers"} waiting for you to decide.
         </p>
 
 
         {pokes.length === 0 ? (
           <div className="glass-card mt-6 px-6 py-12 text-center">
-            <p className="mx-auto max-w-xs text-sm text-muted-foreground dark:text-[#9C92C4]">
+            <p className="mx-auto max-w-xs text-sm text-muted-foreground dark:text-[#9C94BC]">
               Nothing waiting. When you poke someone back, their flower lands here.
             </p>
 

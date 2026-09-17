@@ -29,37 +29,37 @@ function Navbar() {
       {!isLoggedIn && (
         <>
           {/* Desktop */}
-          <nav className="hidden md:flex fixed top-0 z-50 w-full items-center justify-between px-8 py-3 shrink-0 navbar-glass text-indigo-950 dark:text-foreground">
+          <nav className="hidden md:flex fixed top-0 z-50 w-full items-center justify-between px-8 py-3 shrink-0 navbar-glass text-[#1E1A2F] dark:text-foreground">
             <Link to="/" className="flex items-center gap-2 cursor-pointer">
               <img
                 src={logo}
                 alt="Fondra"
-                className="h-9 w-9 animate-spin animation-duration-[4s]"
+                className="h-9 w-9"
               />
 
-              <span className="font-serif italic text-2xl text-indigo-950 dark:text-foreground">
+              <span className="font-wordmark text-2xl text-[#1E1A2F] dark:text-foreground">
                 Fondra
               </span>
             </Link>
 
-            <div className="flex items-center gap-8 text-[15px] font-medium">
+            <div className="font-body flex items-center gap-8 text-[15px] font-medium">
               <Link
                 to="/about"
-                className="text-indigo-950/80 dark:text-[#D5C9EE] transition-colors hover:text-[#7C6BD4] dark:hover:text-[#F2C3D5]"
+                className="text-[#1E1A2F]/80 dark:text-[#CFC6E6] transition-colors hover:text-[#6A59C4] dark:hover:text-[#F2C3D5]"
               >
                 About
               </Link>
 
               <Link
                 to="/signup"
-                className="text-indigo-950/80 dark:text-[#D5C9EE] transition-colors hover:text-[#7C6BD4] dark:hover:text-[#F2C3D5]"
+                className="text-[#1E1A2F]/80 dark:text-[#CFC6E6] transition-colors hover:text-[#6A59C4] dark:hover:text-[#F2C3D5]"
               >
                 Sign Up
               </Link>
 
               <Link
                 to="/login"
-                className="text-indigo-950/80 dark:text-[#D5C9EE] transition-colors hover:text-[#7C6BD4] dark:hover:text-[#F2C3D5]"
+                className="text-[#1E1A2F]/80 dark:text-[#CFC6E6] transition-colors hover:text-[#6A59C4] dark:hover:text-[#F2C3D5]"
               >
                 Login
               </Link>
@@ -69,15 +69,15 @@ function Navbar() {
           </nav>
 
           {/* Mobile */}
-          <nav className="md:hidden fixed top-0 z-50 flex w-full items-center justify-between px-4 py-2.5 shrink-0 navbar-glass text-indigo-950 dark:text-foreground">
+          <nav className="md:hidden fixed top-0 z-50 flex w-full items-center justify-between px-4 py-2.5 shrink-0 navbar-glass text-[#1E1A2F] dark:text-foreground">
             <Link to="/" className="flex items-center gap-2 cursor-pointer">
               <img
                 src={logo}
                 alt="Fondra"
-                className="h-9 w-9 animate-spin animation-duration-[4s]"
+                className="h-9 w-9"
               />
 
-              <span className="font-serif italic text-2xl text-indigo-950 dark:text-foreground">
+              <span className="font-wordmark text-2xl text-[#1E1A2F] dark:text-foreground">
                 Fondra
               </span>
             </Link>
@@ -104,21 +104,21 @@ function Navbar() {
                 >
                   <DropdownMenuItem
                     render={<Link to="/about" />}
-                    className="block w-full rounded-xl px-3 py-2.5 text-[15px] font-medium cursor-pointer text-indigo-950 dark:text-foreground focus:bg-background dark:focus:bg-white/10"
+                    className="font-body block w-full rounded-xl px-3 py-2.5 text-[15px] font-medium cursor-pointer text-[#1E1A2F] dark:text-foreground focus:bg-background dark:focus:bg-white/10"
                   >
                     About
                   </DropdownMenuItem>
 
                   <DropdownMenuItem
                     render={<Link to="/signup" />}
-                    className="block w-full rounded-xl px-3 py-2.5 text-[15px] font-medium cursor-pointer text-indigo-950 dark:text-foreground focus:bg-background dark:focus:bg-white/10"
+                    className="font-body block w-full rounded-xl px-3 py-2.5 text-[15px] font-medium cursor-pointer text-[#1E1A2F] dark:text-foreground focus:bg-background dark:focus:bg-white/10"
                   >
                     Sign Up
                   </DropdownMenuItem>
 
                   <DropdownMenuItem
                     render={<Link to="/login" />}
-                    className="block w-full rounded-xl px-3 py-2.5 text-[15px] font-medium cursor-pointer text-indigo-950 dark:text-foreground focus:bg-background dark:focus:bg-white/10"
+                    className="font-body block w-full rounded-xl px-3 py-2.5 text-[15px] font-medium cursor-pointer text-[#1E1A2F] dark:text-foreground focus:bg-background dark:focus:bg-white/10"
                   >
                     Login
                   </DropdownMenuItem>
@@ -132,44 +132,44 @@ function Navbar() {
       {isLoggedIn && (
         <>
           {/* Desktop */}
-          <nav className="hidden md:flex fixed top-0 z-50 w-full items-center justify-between px-8 py-3 shrink-0 navbar-glass text-indigo-950 dark:text-foreground">
+          <nav className="hidden md:flex fixed top-0 z-50 w-full items-center justify-between px-8 py-3 shrink-0 navbar-glass text-[#1E1A2F] dark:text-foreground">
             <Link to="/" className="flex items-center gap-2 cursor-pointer">
               <img
                 src={logo}
                 alt="Fondra"
-                className="h-9 w-9 animate-spin animation-duration-[4s]"
+                className="h-9 w-9"
               />
 
-              <span className="font-serif italic text-2xl text-indigo-950 dark:text-foreground">
+              <span className="font-wordmark text-2xl text-[#1E1A2F] dark:text-foreground">
                 Fondra
               </span>
             </Link>
 
-            <div className="flex items-center gap-8 text-[15px] font-medium">
+            <div className="font-body flex items-center gap-8 text-[15px] font-medium">
               <Link
                 to="/dashboard"
-                className="text-indigo-950/80 dark:text-[#D5C9EE] transition-colors hover:text-[#7C6BD4] dark:hover:text-[#F2C3D5]"
+                className="text-[#1E1A2F]/80 dark:text-[#CFC6E6] transition-colors hover:text-[#6A59C4] dark:hover:text-[#F2C3D5]"
               >
                 Dashboard
               </Link>
 
               <Link
                 to="/garden"
-                className="text-indigo-950/80 dark:text-[#D5C9EE] transition-colors hover:text-[#7C6BD4] dark:hover:text-[#F2C3D5]"
+                className="text-[#1E1A2F]/80 dark:text-[#CFC6E6] transition-colors hover:text-[#6A59C4] dark:hover:text-[#F2C3D5]"
               >
                 Garden
               </Link>
 
               <Link
                 to="/circle"
-                className="text-indigo-950/80 dark:text-[#D5C9EE] transition-colors hover:text-[#7C6BD4] dark:hover:text-[#F2C3D5]"
+                className="text-[#1E1A2F]/80 dark:text-[#CFC6E6] transition-colors hover:text-[#6A59C4] dark:hover:text-[#F2C3D5]"
               >
                 Circle
               </Link>
 
               <Link
                 to="/profile"
-                className="text-indigo-950/80 dark:text-[#D5C9EE] transition-colors hover:text-[#7C6BD4] dark:hover:text-[#F2C3D5]"
+                className="text-[#1E1A2F]/80 dark:text-[#CFC6E6] transition-colors hover:text-[#6A59C4] dark:hover:text-[#F2C3D5]"
               >
                 Profile
               </Link>
@@ -185,7 +185,7 @@ function Navbar() {
               <button
                 type="button"
                 onClick={handleLogout}
-                className="text-xs text-[#9990BE] hover:text-[#7C6BD4] dark:text-[#9C92C4] dark:hover:text-[#F2C3D5] transition-colors"
+                className="text-xs text-[#9990BE] hover:text-[#6A59C4] dark:text-[#9C94BC] dark:hover:text-[#F2C3D5] transition-colors"
               >
                 Sign out
               </button>
@@ -193,15 +193,15 @@ function Navbar() {
           </nav>
 
           {/* Mobile */}
-          <nav className="md:hidden fixed top-0 z-50 flex w-full items-center justify-between px-4 py-2.5 shrink-0 navbar-glass text-indigo-950 dark:text-foreground">
+          <nav className="md:hidden fixed top-0 z-50 flex w-full items-center justify-between px-4 py-2.5 shrink-0 navbar-glass text-[#1E1A2F] dark:text-foreground">
             <Link to="/" className="flex items-center gap-2 cursor-pointer">
               <img
                 src={logo}
                 alt="Fondra"
-                className="h-9 w-9 animate-spin animation-duration-[4s]"
+                className="h-9 w-9"
               />
 
-              <span className="font-serif italic text-2xl text-indigo-950 dark:text-foreground">
+              <span className="font-wordmark text-2xl text-[#1E1A2F] dark:text-foreground">
                 Fondra
               </span>
             </Link>
@@ -234,35 +234,35 @@ function Navbar() {
                 >
                   <DropdownMenuItem
                     render={<Link to="/dashboard" />}
-                    className="block w-full rounded-xl px-3 py-2.5 text-[15px] font-medium cursor-pointer text-indigo-950 dark:text-foreground focus:bg-background dark:focus:bg-white/10"
+                    className="font-body block w-full rounded-xl px-3 py-2.5 text-[15px] font-medium cursor-pointer text-[#1E1A2F] dark:text-foreground focus:bg-background dark:focus:bg-white/10"
                   >
                     Dashboard
                   </DropdownMenuItem>
 
                   <DropdownMenuItem
                     render={<Link to="/garden" />}
-                    className="block w-full rounded-xl px-3 py-2.5 text-[15px] font-medium cursor-pointer text-indigo-950 dark:text-foreground focus:bg-background dark:focus:bg-white/10"
+                    className="font-body block w-full rounded-xl px-3 py-2.5 text-[15px] font-medium cursor-pointer text-[#1E1A2F] dark:text-foreground focus:bg-background dark:focus:bg-white/10"
                   >
                     Garden
                   </DropdownMenuItem>
 
                   <DropdownMenuItem
                     render={<Link to="/circle" />}
-                    className="block w-full rounded-xl px-3 py-2.5 text-[15px] font-medium cursor-pointer text-indigo-950 dark:text-foreground focus:bg-background dark:focus:bg-white/10"
+                    className="font-body block w-full rounded-xl px-3 py-2.5 text-[15px] font-medium cursor-pointer text-[#1E1A2F] dark:text-foreground focus:bg-background dark:focus:bg-white/10"
                   >
                     Circle
                   </DropdownMenuItem>
 
                   <DropdownMenuItem
                     render={<Link to="/profile" />}
-                    className="block w-full rounded-xl px-3 py-2.5 text-[15px] font-medium cursor-pointer text-indigo-950 dark:text-foreground focus:bg-background dark:focus:bg-white/10"
+                    className="font-body block w-full rounded-xl px-3 py-2.5 text-[15px] font-medium cursor-pointer text-[#1E1A2F] dark:text-foreground focus:bg-background dark:focus:bg-white/10"
                   >
                     Profile
                   </DropdownMenuItem>
 
                   <DropdownMenuItem
                     onClick={handleLogout}
-                    className="rounded-xl px-3 py-2.5 text-[15px] font-medium cursor-pointer text-[#9990BE] dark:text-[#9C92C4] focus:bg-background dark:focus:bg-white/10"
+                    className="font-body rounded-xl px-3 py-2.5 text-[15px] font-medium cursor-pointer text-[#9990BE] dark:text-[#9C94BC] focus:bg-background dark:focus:bg-white/10"
                   >
                     Sign out
                   </DropdownMenuItem>

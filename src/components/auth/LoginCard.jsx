@@ -1,6 +1,4 @@
 //using Schadcn
-import { Button } from "@/components/ui/button.jsx";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.jsx";
 import { Input } from "@/components/ui/input.jsx";
 import { Label } from "@/components/ui/label.jsx";
 import { Link } from "react-router-dom";
@@ -10,7 +8,7 @@ import service from '@/services/index.service.js';
 import { useContext, useState } from "react";
 
 export function LoginCard(){
-  const { getUser } = useContext(AuthContext);
+  const { getUser, isLoggedIn } = useContext(AuthContext);
 
   const navigate = useNavigate()
 
@@ -24,6 +22,11 @@ export function LoginCard(){
 
    const handleLogin = async (e) => {
     e.preventDefault();
+
+    if (isLoggedIn) {
+      setErrorMessage("You are already logged in.");
+      return;
+    }
 
     const body = {
      identifier,
@@ -55,150 +58,64 @@ export function LoginCard(){
   };
 
   return (
-    <Card
-      className="
-          w-full
-          bg-white/85
-          dark:bg-[#403A5D]/90
-          shadow-[0_16px_46px_rgba(33,27,61,0.14)]
-          dark:shadow-[0_16px_46px_rgba(0,0,0,0.35)]
-          backdrop-blur-xl
-          p-3
-          py-8
-        "
-    >
-      <CardHeader>
-        <CardTitle
-          className="
-              font-serif
-              text-3xl
-              font-normal
-              text-[#211B3D]
-              dark:text-foreground
-            "
-        >
-          Welcome!
-        </CardTitle>
-      </CardHeader>
+    <div className="w-full">
+      <div className="flex flex-col">
+        <span className="auth-eyebrow">Log in</span>
+        <h1 className="auth-title">Welcome back</h1>
+        <p className="auth-sub">See how your people are doing.</p>
+      </div>
 
-      <CardContent>
-        <form onSubmit={handleLogin} className="flex flex-col gap-6">
+      <div>
+        <form onSubmit={handleLogin} className="flex flex-col gap-5">
           <div className="grid gap-2">
-            <Label
-              className="
-                      text-[#453D6B]
-                      dark:text-[#D5C9EE]
-                    "
-            >
+            <Label htmlFor="identifier" className="auth-label">
               Username or email
             </Label>
 
-            <Input 
+            <Input
               value={identifier}
-
-            onChange={handleIdentifier}
+              onChange={handleIdentifier}
               id="identifier"
-                type="text"
-
-              placeholder="Username or Email"
+              type="text"
+              placeholder="Username or email"
               autoComplete="username"
               required
-              className="
-                      border-[#7C6BD4]/20
-                      bg-white/75
-                      text-[#211B3D]
-                      placeholder:text-[#9990BE]
-                      focus-visible:border-[#7C6BD4]
-                      focus-visible:ring-[#7C6BD4]/30
-
-                      dark:border-[#C2B3E4]/20
-                      dark:bg-[#211B3D]/35
-                      dark:text-foreground
-                      dark:placeholder:text-[#9990BE]
-                      dark:focus-visible:border-[#C2B3E4]
-                      dark:focus-visible:ring-[#C2B3E4]/30
-                    "
+              className="auth-input"
             />
           </div>
 
           <div className="grid gap-2">
-            <Label
-              htmlFor="password"
-              className="
-                        text-[#453D6B]
-                        dark:text-[#D5C9EE]
-                      "
-            >
+            <Label htmlFor="password" className="auth-label">
               Password
             </Label>
 
             <Input
               value={password}
-
-            onChange={handlePasswordChange}
+              onChange={handlePasswordChange}
               id="password"
               type="password"
               placeholder="Enter your password"
               autoComplete="current-password"
               required
-              className="
-                      border-[#7C6BD4]/20
-                      bg-white/75
-                      text-[#211B3D]
-                      placeholder:text-[#9990BE]
-                      focus-visible:border-[#7C6BD4]
-                      focus-visible:ring-[#7C6BD4]/30
-
-                      dark:border-[#C2B3E4]/20
-                      dark:bg-[#211B3D]/35
-                      dark:text-foreground
-                      dark:placeholder:text-[#9990BE]
-                      dark:focus-visible:border-[#C2B3E4]
-                      dark:focus-visible:ring-[#C2B3E4]/30
-                    "
+              className="auth-input"
             />
           </div>
 
-          <Button
-            type="submit"
-            className="
-                    w-full
-                    rounded-full
-                    border-none
-                    bg-linear-to-r from-pink-400 to-purple-500 hover:from-pink-500 hover:to-purple-600 text-white"
-                  
-                  
-          >
+          <button type="submit" className="violet-button mt-1 w-full justify-center">
             Sign in
-          </Button>
-          {errorMessage && <p className="dark:text-fuchsia-300">{errorMessage}</p>}
+          </button>
+
+          {errorMessage && <p className="auth-error">{errorMessage}</p>}
         </form>
 
-        <p
-          className="
-                mt-4
-                text-center
-                text-sm
-                font-medium
-                text-muted-foreground
-                dark:text-[#C2B3E4]
-              "
-        >
+        <p className="auth-alt">
           New here?{" "}
-          <Link
-            to="/signup"
-            className="
-                    text-[#211B3D]
-                    underline
-                    underline-offset-4
-                    dark:text-foreground
-                  "
-          >
+          <Link to="/signup" className="violet-link">
             Create an account
           </Link>
         </p>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
 

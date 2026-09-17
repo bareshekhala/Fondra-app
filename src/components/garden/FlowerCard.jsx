@@ -117,7 +117,7 @@ function FlowerCard({ flower, variant = "collection", onChanged }) {
         className="h-28"
       />
 
-      <p className="mt-3 font-serif text-xl italic capitalize text-[#211B3D] dark:text-foreground">
+      <p className="mt-3 font-display text-xl capitalize text-[#1E1A2F] dark:text-foreground">
         {flower.species || "flower"}
       </p>
 
@@ -125,19 +125,19 @@ function FlowerCard({ flower, variant = "collection", onChanged }) {
       <div className="mt-3 flex items-center gap-2">
         <Avatar user={sender} size={28} />
 
-        <p className="text-sm font-bold text-[#211B3D] dark:text-foreground">
+        <p className="text-sm font-bold text-[#1E1A2F] dark:text-foreground">
           {sender ? sender.name : "Someone"}
         </p>
       </div>
 
-      <p className="mt-1 text-xs font-medium text-muted-foreground dark:text-[#9C92C4]">
+      <p className="mt-1 text-xs font-medium text-muted-foreground dark:text-[#9C94BC]">
         {format(new Date(flower.createdAt), "d MMMM yyyy · HH:mm")}
       </p>
 
 
       {!isUnplanted && flower.picked && (
         <div className="mt-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
-          <p className="text-xs font-bold text-[#7C6BD4] dark:text-[#A38DF0]">
+          <p className="text-xs font-bold text-[#6A59C4] dark:text-[#C2B3E4]">
             Picked — in the garden
           </p>
 
@@ -145,7 +145,7 @@ function FlowerCard({ flower, variant = "collection", onChanged }) {
             type="button"
             onClick={handlePick}
             disabled={busy}
-            className="text-xs font-bold text-muted-foreground underline underline-offset-2 transition hover:text-[#211B3D] disabled:opacity-50 dark:text-[#9C92C4] dark:hover:text-foreground"
+            className="text-xs font-bold text-muted-foreground underline underline-offset-2 transition hover:text-[#1E1A2F] disabled:opacity-50 dark:text-[#9C94BC] dark:hover:text-foreground"
           >
             Unpick
           </button>

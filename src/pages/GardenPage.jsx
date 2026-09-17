@@ -44,25 +44,25 @@ function GardenPage() {
 
 
   return (
-    <div className="min-h-screen bg-background dark:bg-[#1D1739]">
+    <div className="font-body min-h-screen bg-[#F4F1EC] dark:bg-[#14112B]">
       <Navbar />
 
       <div className="mx-auto w-full max-w-2xl px-5 pt-20 pb-28 md:pt-24 md:pb-14">
 
-        <h1 className="font-serif text-3xl italic text-[#211B3D] dark:text-foreground">
+        <h1 className="font-display text-3xl text-[#1E1A2F] dark:text-foreground">
           Your garden
         </h1>
 
-        <p className="mt-1 text-sm font-medium text-muted-foreground dark:text-[#9C92C4]">
+        <p className="mt-1 text-sm font-medium text-muted-foreground dark:text-[#9C94BC]">
           Every poke back becomes a flower.
         </p>
 
-        <p className="mt-2 text-sm font-medium text-muted-foreground dark:text-[#9C92C4]">
+        <p className="mt-2 text-sm font-medium text-muted-foreground dark:text-[#9C94BC]">
           The plot holds 15 flowers, and shows your 15 newest picks. Want
           different ones out here?{" "}
           <Link
             to="/garden/collection"
-            className="font-bold text-[#7C6BD4] underline underline-offset-2 dark:text-[#A38DF0]"
+            className="font-bold text-[#6A59C4] underline underline-offset-2 dark:text-[#C2B3E4]"
           >
             Pick them in your collection
           </Link>
@@ -82,11 +82,11 @@ function GardenPage() {
             to="/garden/collection"
             className="glass-card px-6 py-6 transition hover:bg-white dark:hover:bg-white/12"
           >
-            <p className="font-serif text-2xl italic text-[#211B3D] dark:text-foreground">
+            <p className="font-display text-2xl text-[#1E1A2F] dark:text-foreground">
               My collection
             </p>
 
-            <p className="mt-1 text-sm font-medium text-muted-foreground dark:text-[#9C92C4]">
+            <p className="mt-1 text-sm font-medium text-muted-foreground dark:text-[#9C94BC]">
               {garden.length} {garden.length === 1 ? "flower" : "flowers"} kept
             </p>
           </Link>
@@ -95,11 +95,11 @@ function GardenPage() {
             to="/garden/unplanted"
             className="glass-card px-6 py-6 transition hover:bg-white dark:hover:bg-white/12"
           >
-            <p className="font-serif text-2xl italic text-[#211B3D] dark:text-foreground">
+            <p className="font-display text-2xl text-[#1E1A2F] dark:text-foreground">
               Unplanted flowers
             </p>
 
-            <p className="mt-1 text-sm font-medium text-muted-foreground dark:text-[#9C92C4]">
+            <p className="mt-1 text-sm font-medium text-muted-foreground dark:text-[#9C94BC]">
               {unplanted} waiting for you
             </p>
           </Link>

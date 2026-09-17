@@ -108,7 +108,7 @@ function NoteActions({ checkInId, savedNote }) {
     <div className="mt-2 flex items-start justify-between gap-3">
 
       {note ? (
-        <p className="min-w-0 font-serif text-[15px] italic text-[#453D6B] dark:text-[#C6BCE6]">
+        <p className="min-w-0 font-display text-[15px] italic text-[#4A4462] dark:text-[#CFC6E6]">
           "{note}"
         </p>
       ) : null}
@@ -173,10 +173,10 @@ function NoteActions({ checkInId, savedNote }) {
                   maxLength={140}
                   autoFocus
                   placeholder="Write a note"
-                  className="rounded-xl bg-background text-[#211B3D] dark:bg-white/5 dark:text-foreground"
+                  className="rounded-xl bg-background text-[#1E1A2F] dark:bg-white/5 dark:text-foreground"
                 />
 
-                <p className="text-right text-xs text-muted-foreground dark:text-[#9C92C4]">
+                <p className="text-right text-xs text-muted-foreground dark:text-[#9C94BC]">
                   {draft.length}/140 characters
                 </p>
 

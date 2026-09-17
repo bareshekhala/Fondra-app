@@ -16,11 +16,11 @@ function LavenderField() {
       />
 
       <div className="mt-1 text-center">
-        <h2 className="font-serif text-2xl italic text-[#211B3D] dark:text-foreground">
+        <h2 className="font-display text-2xl text-[#1E1A2F] dark:text-foreground">
           Welcome back!
         </h2>
 
-        <p className="mt-1 text-sm text-[#453D6B] dark:text-[#D5C9EE]">
+        <p className="mt-1 text-sm text-[#4A4462] dark:text-[#CFC6E6]">
           Your circle is glad you're here.
         </p>
 

@@ -132,7 +132,7 @@ const [name, setName] = useState(user ? user.name : "")
   };
 
   return (
-    <div className="min-h-screen bg-background dark:bg-[#1D1739]">
+    <div className="font-body min-h-screen bg-[#F4F1EC] dark:bg-[#14112B]">
       <Navbar />
 
       <div className="mx-auto w-full max-w-md px-5 pt-20 pb-28 md:pt-24 md:pb-14">
@@ -141,11 +141,11 @@ const [name, setName] = useState(user ? user.name : "")
             <Avatar user={user} size={120} />
           </div>
 
-          <h1 className="mt-5 font-serif text-3xl italic text-[#211B3D] dark:text-foreground">
+          <h1 className="mt-5 font-display text-3xl text-[#1E1A2F] dark:text-foreground">
             {user ? `${user.name}` : ""}
           </h1>
 
-          <p className="mt-1 text-sm font-medium text-muted-foreground dark:text-[#9C92C4]">
+          <p className="mt-1 text-sm font-medium text-muted-foreground dark:text-[#9C94BC]">
             {user ? `@${user.username}` : ""}
           </p>
 
@@ -214,16 +214,16 @@ const [name, setName] = useState(user ? user.name : "")
         </section>
 
         <section className="glass-card mt-4 px-6 py-6">
-          <h2 className="font-serif text-xl italic text-[#211B3D] dark:text-foreground">
+          <h2 className="font-display text-xl text-[#1E1A2F] dark:text-foreground">
             Your name
           </h2>
 
-          <p className="mt-1 text-xs font-medium text-muted-foreground dark:text-[#9C92C4]">
+          <p className="mt-1 text-xs font-medium text-muted-foreground dark:text-[#9C94BC]">
             This is how your people see you. Your username stays the same.
           </p>
 
           <form onSubmit={handleRename} className="mt-4 flex flex-col gap-2">
-            <Label htmlFor="name" className="text-[#403A5D] dark:text-gray-100">
+            <Label htmlFor="name" className="text-[#1E1A2F] dark:text-gray-100">
               Name
             </Label>
 
@@ -248,18 +248,18 @@ const [name, setName] = useState(user ? user.name : "")
               </button>
             </div>
 
-            <p className="text-right text-[11px] text-muted-foreground dark:text-[#9C92C4]">
+            <p className="text-right text-[11px] text-muted-foreground dark:text-[#9C94BC]">
               {name.length} / 40
             </p>
           </form>
         </section>
 
         <section className="glass-card mt-4 px-6 py-6">
-          <h2 className="font-serif text-xl italic text-[#211B3D] dark:text-foreground">
+          <h2 className="font-display text-xl text-[#1E1A2F] dark:text-foreground">
             Delete account
           </h2>
 
-          <p className="mt-1 text-xs font-medium text-muted-foreground dark:text-[#9C92C4]">
+          <p className="mt-1 text-xs font-medium text-muted-foreground dark:text-[#9C94BC]">
             Your check-ins, pokes, garden and circle go with it. There is no undo.
           </p>
 
@@ -308,7 +308,7 @@ const [name, setName] = useState(user ? user.name : "")
 
         <Link
           to="/dashboard"
-          className="mt-6 block text-center text-sm font-medium text-muted-foreground dark:text-[#9C92C4]"
+          className="mt-6 block text-center text-sm font-medium text-muted-foreground dark:text-[#9C94BC]"
         >
           ← Back to dashboard
         </Link>

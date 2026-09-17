@@ -14,7 +14,7 @@ function Avatar({ user, size = 44, ring = false }) {
 
   return (
     <div
-      className={`shrink-0 rounded-full ${ring ? "border-[2.5px] border-[#D9709A] p-0.75" : ""}`}
+      className={`shrink-0 rounded-full ${ring === "watch" ? "border-[2.5px] border-[#6F9A7E] p-0.75" : ring ? "border-[2.5px] border-[#F1D48A] p-0.75" : ""}`}
       style={{ width: size, height: size }}
     >
       <div className="grid h-full w-full place-items-center overflow-hidden rounded-full bg-[#7C6BD4]">

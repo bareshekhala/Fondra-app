@@ -5,9 +5,12 @@
 
 @theme {
   --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-wordmark: "Gloock", Georgia, serif;
 
-  --color-background: #F1ECFA;
-  --color-foreground: #211B3D;
+  --color-background: #F4F1EC;
+  --color-foreground: #1E1A2F;
   --color-card: #FFFFFF;
   --color-card-foreground: #211B3D;
   --color-popover: #FFFFFF;
@@ -17,7 +20,7 @@
   --color-secondary: #F2C3D5;
   --color-secondary-foreground: #2A2148;
   --color-muted: #EFEAF8;
-  --color-muted-foreground: #6E6598;
+  --color-muted-foreground: #6F6A86;
   --color-accent: #F2C3D5;
   --color-accent-foreground: #2A2148;
   --color-destructive: #D64B6A;
@@ -32,18 +35,18 @@
 }
 
 .dark {
-  --color-background: #1D1739;
+  --color-background: #14112B;
   --color-foreground: #F1ECFA;
-  --color-card: #2A2148;
+  --color-card: #1E1A3A;
   --color-card-foreground: #F1ECFA;
-  --color-popover: #2A2148;
+  --color-popover: #1E1A3A;
   --color-popover-foreground: #F1ECFA;
   --color-primary: #A38DF0;
   --color-primary-foreground: #1D1739;
   --color-secondary: #3A3060;
   --color-secondary-foreground: #F1ECFA;
   --color-muted: #2F2752;
-  --color-muted-foreground: #9C92C4;
+  --color-muted-foreground: #9C94BC;
   --color-accent: #3A3060;
   --color-accent-foreground: #F1ECFA;
   --color-destructive: #F28BA5;
@@ -85,29 +88,69 @@
 }
 
 .dark .navbar-glass {
-  background: rgba(33, 27, 61, 0.6);
+  background: rgba(20, 17, 43, 0.6);
   border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
 .icon-button {
-  @apply flex size-8 items-center justify-center rounded-full border border-white/70 bg-white/80 text-muted-foreground transition hover:bg-white hover:text-[#211B3D] disabled:opacity-50 dark:border-white/15 dark:bg-white/10 dark:text-[#9C92C4] dark:hover:text-foreground;
+  @apply flex size-8 items-center justify-center rounded-full border border-white/70 bg-white/80 text-muted-foreground transition hover:bg-white hover:text-[#1E1A2F] disabled:opacity-50 dark:border-white/15 dark:bg-white/10 dark:text-[#9C94BC] dark:hover:text-foreground;
 }
 
 /* "+ Add note" / "+ Add social energy" */
 .add-button {
-  @apply mt-2 text-xs font-bold text-[#7C6BD4] transition hover:text-[#211B3D] disabled:opacity-50 dark:text-[#A38DF0] dark:hover:text-foreground;
+  @apply mt-2 text-xs font-bold text-[#6A59C4] transition hover:text-[#1E1A2F] disabled:opacity-50 dark:text-[#C2B3E4] dark:hover:text-foreground;
 }
 
 .dialog-title {
-  @apply font-serif text-2xl italic text-[#211B3D] dark:text-foreground;
+  @apply font-display text-2xl text-[#1E1A2F] dark:text-foreground;
 }
 
 .dialog-box {
-  @apply rounded-3xl bg-white dark:bg-[#2A2148];
+  @apply rounded-3xl bg-white dark:bg-[#1E1A3A];
 }
 
 .pink-button {
-  @apply rounded-full bg-linear-to-b from-[#FFFCFE] to-[#F2C3D5] px-6 font-bold text-[#2A2148] shadow-[0_6px_18px_rgba(222,123,158,0.34)];
+  @apply font-body rounded-full bg-[#F1D48A] px-6 font-semibold text-[#1E1A2F] transition hover:bg-[#EBC96F] dark:shadow-[0_8px_20px_rgba(0,0,0,0.4)];
+}
+
+.pill-button {
+  @apply font-body inline-flex h-8 items-center gap-1.5 rounded-full bg-[#E9E4F6] px-3.5 text-xs font-semibold text-[#6A59C4] transition hover:bg-[#DED6F3] disabled:cursor-not-allowed disabled:opacity-50 dark:bg-[#A38DF0]/16 dark:text-[#C2B3E4] dark:hover:bg-[#A38DF0]/25;
+}
+
+.violet-button {
+  @apply font-body inline-flex h-11 items-center whitespace-nowrap rounded-full bg-[#7C6BD4] px-5 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(124,107,212,0.28)] transition hover:bg-[#6A59C4] hover:shadow-[0_10px_24px_rgba(124,107,212,0.36)] dark:bg-[#A38DF0] dark:text-[#14112B] dark:hover:bg-[#B7A6F5];
+}
+
+.auth-eyebrow {
+  @apply font-body text-[11px] font-semibold tracking-[0.14em] uppercase text-[#6F6A86] dark:text-[#9C94BC];
+}
+
+.auth-title {
+  @apply font-display mt-2 text-3xl leading-tight text-[#1E1A2F] dark:text-[#F1ECFA];
+}
+
+.auth-sub {
+  @apply font-body mt-2 mb-4 text-sm text-[#6F6A86] dark:text-[#9C94BC];
+}
+
+.auth-label {
+  @apply font-body text-[12.5px] font-semibold text-[#1E1A2F] dark:text-[#F1ECFA];
+}
+
+.auth-input {
+  @apply font-body h-11 rounded-xl border-[#D9D2E6] bg-white px-3.5 text-sm text-[#1E1A2F] placeholder:text-[#8E88A6] focus-visible:border-[#7C6BD4] focus-visible:ring-[#7C6BD4]/25 dark:border-white/18 dark:bg-white/6 dark:text-[#F1ECFA] dark:placeholder:text-[#8E86B3] dark:focus-visible:border-[#A38DF0] dark:focus-visible:ring-[#A38DF0]/30;
+}
+
+.auth-error {
+  @apply font-body text-sm text-[#B8503F] dark:text-[#F2A7A7];
+}
+
+.auth-alt {
+  @apply font-body mt-4 text-center text-sm text-[#6F6A86] dark:text-[#9C94BC];
+}
+
+.violet-link {
+  @apply font-body whitespace-nowrap text-sm font-medium text-[#6A59C4] underline underline-offset-4 transition hover:text-[#1E1A2F] dark:text-[#C2B3E4] dark:hover:text-[#F1ECFA];
 }
 
 
@@ -212,7 +255,7 @@
 
 .logo-loader-text {
   margin-top: 18px;
-  font-family: "Instrument Serif", serif;
+  font-family: "Fraunces", serif;
   font-size: 17px;
   font-weight: 500;
   color: #292344;
@@ -221,7 +264,7 @@
 
 .logo-loader-tagline {
   margin-top: 9px;
-  font-family: "Instrument Serif", serif;
+  font-family: "Fraunces", serif;
   font-size: 13px;
   color: #292344;
   opacity: 0.6;

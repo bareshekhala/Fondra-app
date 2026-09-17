@@ -138,14 +138,34 @@ function HowItWorksPage() {
                   </p>
                 </div>
               </div>
+
+              <div
+                className="glass-card flex items-center gap-4 p-3"
+              >
+                <div className="shrink-0 rounded-full border-[2.5px] border-[#6F9A7E] p-0.75">
+                  <div className="grid h-14 w-14 place-items-center rounded-full bg-[#7C6BD4] text-xl font-bold text-white md:h-18 md:w-18">
+                    S
+                  </div>
+                </div>
+                <div>
+                  <h1 className="text-lg md:text-xl font-bold">Sara</h1>
+                  <p className="text-sm md:text-base font-bold text-[#3E6B4E] dark:text-[#9CC7AA]">
+                    Out alone · check on them after 23:30
+                  </p>
+                </div>
+              </div>
             </div>
 
             <p className="text-center leading-relaxed font-body text-base max-w-[36ch]">
               <span className="font-bold text-lg font-display block mb-1">
-                How having a hard day looks
+                What the rings mean
               </span>
-              One ring around the avatar. The line under the name swaps from a
+              A <span className="font-bold text-[#8A6A1F] dark:text-[#F1D48A]">yellow</span> ring is a hard day: the line under the name swaps from a
               time to their note.
+              <br />
+              A <span className="font-bold text-[#3E6B4E] dark:text-[#9CC7AA]">green</span> ring means they've gone out alone and
+              asked you to check on them after a certain time, if they don't
+              check back in, it turns <span className="font-bold text-[#8A6A1F] dark:text-[#F1D48A]">yellow</span>.
             </p>
           </div>
 

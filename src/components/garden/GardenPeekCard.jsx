@@ -22,7 +22,7 @@ function GardenPeekCard({ flowers = [], unplanted = 0 }) {
         </Link>
       </div>
 
-      <GardenPlot flowers={flowers} />
+      <GardenPlot flowers={flowers} compact />
 
       <p className="mt-auto pt-3 text-xs font-medium text-muted-foreground dark:text-[#9C94BC]">
         {unplanted === 0

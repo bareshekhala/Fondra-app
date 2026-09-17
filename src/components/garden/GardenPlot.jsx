@@ -4,7 +4,7 @@ import { flowerImage } from "@/utils/flowers.js";
 import gardenDay from "@/assets/garden-plot-day.jpg";
 import gardenNight from "@/assets/garden-plot-night.jpg";
 
-function GardenPlot({ flowers }) {
+function GardenPlot({ flowers, compact = false }) {
 
   const growing = flowers.filter((flower) => flower.picked);
 
@@ -43,11 +43,13 @@ function GardenPlot({ flowers }) {
             ? "Nothing planted yet."
             : "Your plot is empty."}
 
-          <span className="mt-1 block font-sans text-[13px] font-medium not-italic text-[#4A4462] dark:text-[#CFC6E6]">
-            {flowers.length === 0
-              ? "Poke someone and if they poke you back, your first flower can grow here."
-              : "None of your flowers are picked. Pick one from your collection."}
-          </span>
+          {!compact && (
+            <span className="mt-1 block font-sans text-[13px] font-medium not-italic text-[#4A4462] dark:text-[#CFC6E6]">
+              {flowers.length === 0
+                ? "Poke someone and if they poke you back, your first flower can grow here."
+                : "None of your flowers are picked. Pick one from your collection."}
+            </span>
+          )}
         </p>
       )}
     </div>

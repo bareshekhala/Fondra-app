@@ -21,6 +21,7 @@ function SignUpCard() {
 
   const [busy, setBusy] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [note, setNote] = useState(null);
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -42,6 +43,18 @@ function SignUpCard() {
       console.log(error);
       setErrorMessage(showError(error));
       setBusy(false);
+    }
+  };
+
+  const handleResend = async () => {
+    setErrorMessage(null);
+
+    try {
+      await service.post("/auth/resend-code", { email });
+      setNote("A new code is on its way. It expires in 10 minutes.");
+    } catch (error) {
+      console.log(error);
+      setErrorMessage(showError(error));
     }
   };
 
@@ -95,6 +108,15 @@ function SignUpCard() {
             </button>
 
             {errorMessage && <p className="auth-error">{errorMessage}</p>}
+
+            {note && <p className="auth-sub">{note}</p>}
+
+            <p className="auth-alt">
+              Code expired or never arrived?{" "}
+              <button type="button" onClick={handleResend} className="violet-link">
+                Resend code
+              </button>
+            </p>
           </form>
         </>
       ) : (

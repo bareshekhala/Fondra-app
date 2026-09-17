@@ -32,11 +32,12 @@ function ProfilePage() {
   const [busy, setBusy] = useState(false);
   const [removeOpen, setRemoveOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
-  const [zoom, setZoom] = useState(localStorage.getItem("fondra-zoom") || "1");
+  const [zoom, setZoom] = useState(localStorage.getItem("fondra-zoom") || "100%");
 
   const zoomVal = [
-    ["1", "Normal"],
-    ["1.2", "Bigger"],
+    ["100%", "Normal"],
+    ["120%", "Bigger"],
+    ["140%", "Biggest"],
   ];
 
   const handleZoom = (value) => {
@@ -45,7 +46,7 @@ function ProfilePage() {
   };
 
   useEffect(() => {
-    document.documentElement.style.zoom = zoom;
+    document.documentElement.style.fontSize = zoom;
   }, [zoom]);
 const [name, setName] = useState(user ? user.name : "")
 
@@ -278,7 +279,7 @@ const [name, setName] = useState(user ? user.name : "")
             Make everything in Fondra bigger so it's easier to read. It stays that way until you change it back.
           </p>
 
-          <div className="mt-4 flex gap-2">
+          <div className="mt-4 flex flex-wrap gap-2">
             {zoomVal.map(([value, label]) => (
               <button
                 key={value}

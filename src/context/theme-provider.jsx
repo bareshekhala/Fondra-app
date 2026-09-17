@@ -39,7 +39,7 @@ export function ThemeProvider({
   }, [theme])
 
   useEffect(() => {
-    document.documentElement.style.zoom = localStorage.getItem("fondra-zoom") || "1"
+    document.documentElement.style.fontSize = localStorage.getItem("fondra-zoom") || "100%"
   }, [])
 
   const value = {

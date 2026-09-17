@@ -36,7 +36,7 @@ function Dashboard() {
           )}
         </div>
 
-        <div className="relative mx-auto flex min-h-dvh max-w-360 flex-col items-center justify-center gap-10 px-5 pt-3 pb-5 md:grid md:grid-cols-2 md:items-center md:gap-x-10 md:gap-y-8 md:px-10 desk:grid-cols-[240px_minmax(0,780px)_minmax(320px,1fr)] desk:items-start desk:gap-0 desk:py-0 desk:content-center">
+        <div className="relative mx-auto flex min-h-dvh max-w-360 flex-col items-center justify-center gap-10 px-5 pt-16 pb-5 md:grid md:grid-cols-2 md:items-center md:gap-x-10 md:gap-y-8 md:px-10 desk:grid-cols-[240px_minmax(0,780px)_minmax(320px,1fr)] desk:items-start desk:gap-0 desk:py-0 desk:content-center">
 
           <div className="relative z-10 w-fit md:col-start-1 md:row-start-1 md:self-end desk:col-start-auto desk:row-start-auto desk:self-auto desk:mt-2 desk:ml-36">
             <h1 className="font-wordmark whitespace-nowrap text-[clamp(64px,19vw,190px)] md:text-[clamp(72px,11vw,150px)] desk:text-[190px] leading-none tracking-[-0.01em] text-[#6A59C4] dark:text-[#B7ACD3]">
@@ -73,7 +73,7 @@ function Dashboard() {
                 feed, no messages to write, nothing to keep up with.
               </p>
 
-              <div className="mt-5 flex items-center gap-5 desk:mt-8">
+              <div className="mt-5 flex flex-wrap items-center gap-5 desk:mt-8">
                 {isLoggedIn ? (
                   <Link to="/dashboard" className="violet-button">
                     Go to your dashboard

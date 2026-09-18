@@ -39,7 +39,7 @@ function CircleCard({ circle }) {
           <ul>
           {circle.map((otherUser) => (
             <CircleMember
-              key={otherUser._id}
+              key={`${otherUser._id}-${otherUser.pokedAt}-${otherUser.myPokeAt}-${otherUser.pokesToday}`}
               otherUser={otherUser}
             />
           ))}

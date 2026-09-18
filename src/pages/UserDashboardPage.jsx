@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import { format } from "date-fns";
 
 import service from "@/services/index.service.js";
@@ -69,6 +69,42 @@ function UserDashboardPage() {
 
   useEffect(() => {
     getData();
+  }, []);
+
+
+  const lastSeen = useRef(null);
+  const checking = useRef(false);
+
+  useEffect(() => {
+    const check = async () => {
+      if (document.visibilityState !== "visible" || checking.current) {
+        return;
+      }
+
+      checking.current = true;
+
+      try {
+        const { data } = await service.get("/notifications");
+        const newest = data.notifications[0] ? data.notifications[0]._id : null;
+
+        if (data.unread > 0 || newest !== lastSeen.current) {
+          lastSeen.current = newest;
+          await getData();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+
+      checking.current = false;
+    };
+
+    const tick = setInterval(check, 5 * 1000);
+    document.addEventListener("visibilitychange", check);
+
+    return () => {
+      clearInterval(tick);
+      document.removeEventListener("visibilitychange", check);
+    };
   }, []);
 
   if (loading) {

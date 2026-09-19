@@ -1,11 +1,11 @@
-import { Marker, useMapContext } from "react-simple-maps";
+import { useMapContext } from "react-simple-maps";
 
 function MapPeople({ me, located }) {
-const LINE = "#7C6BD4";
-const NEAR = 44;
+  const LINE = "#7C6BD4";
+  const GAP = 44;
+  const EDGE = 24;
 
-
-  const { projection } = useMapContext();
+  const { projection, width, height } = useMapContext();
 
   const toCoords = (person) => {
     return [person.location.longitude, person.location.latitude];
@@ -27,34 +27,37 @@ const NEAR = 44;
   };
 
   const people = me ? [...located, me] : located;
+  const positions = people.map((person) => projection(toCoords(person)));
 
-  const groups = [];
+  for (let round = 0; round < 40; round++) {
+    for (let i = 0; i < positions.length; i++) {
+      for (let j = i + 1; j < positions.length; j++) {
+        const dx = positions[j][0] - positions[i][0];
+        const dy = positions[j][1] - positions[i][1];
+        const dist = Math.sqrt(dx * dx + dy * dy);
 
-  people.forEach((person) => {
-    const [x, y] = projection(toCoords(person));
-    const near = groups.find((group) => {
-      const gx = group.x - x;
-      const gy = group.y - y;
-      return Math.sqrt(gx * gx + gy * gy) < NEAR;
-    });
+        if (dist < GAP) {
+          const angle = (i + j) * 2.4;
+          const ux = dist < 0.5 ? Math.cos(angle) : dx / dist;
+          const uy = dist < 0.5 ? Math.sin(angle) : dy / dist;
+          const push = (GAP - dist) / 2;
 
-    if (near) {
-      near.members.push(person);
-    } else {
-      groups.push({ x, y, coordinates: toCoords(person), members: [person] });
+          positions[i][0] -= ux * push;
+          positions[i][1] -= uy * push;
+          positions[j][0] += ux * push;
+          positions[j][1] += uy * push;
+        }
+      }
     }
+  }
+
+  positions.forEach((position) => {
+    position[0] = Math.min(Math.max(position[0], EDGE), width - EDGE);
+    position[1] = Math.min(Math.max(position[1], EDGE), height - EDGE);
   });
 
-  const offsetOf = (count, index) => {
-    const radius = count === 1 ? 0 : Math.max(30, (count * 46) / (2 * Math.PI));
-    const angle = (index / count) * 2 * Math.PI - Math.PI / 2;
-    return [Math.round(Math.cos(angle) * radius), Math.round(Math.sin(angle) * radius)];
-  };
-
   const positionOf = (person) => {
-    const group = groups.find((g) => g.members.includes(person));
-    const [dx, dy] = offsetOf(group.members.length, group.members.indexOf(person));
-    return [group.x + dx, group.y + dy];
+    return positions[people.indexOf(person)];
   };
 
   const arcPath = (from, to) => {
@@ -93,99 +96,91 @@ const NEAR = 44;
       ))
     : null;
 
-  const markers = groups.map((group) => {
-    const count = group.members.length;
+  const markers = people.map((person, index) => {
+    const [x, y] = positions[index];
+    const isMe = person === me;
+    const outer = 18;
+    const inner = 16;
 
     return (
-      <Marker key={`${group.x},${group.y}`} coordinates={group.coordinates}>
-        {group.members.map((person, index) => {
-          const [dx, dy] = offsetOf(count, index);
-          const isMe = person === me;
-          const outer = isMe ? 26 : 22;
-          const inner = isMe ? 24 : 20;
+      <g key={isMe ? "me" : person._id} transform={`translate(${x}, ${y})`} className="group">
+        {isMe && (
+          <>
+            <circle r={27} className="fill-[#2FB596]/15 dark:fill-[#9EF0D2]/20" />
+            <circle r={22} fill="none" strokeWidth={1} className="stroke-[#2FB596] dark:stroke-[#9EF0D2]" />
+          </>
+        )}
 
-          return (
-            <g key={isMe ? "me" : person._id} transform={`translate(${dx}, ${dy})`} className="group">
-              {isMe && (
-                <>
-                  <circle r={38} className="fill-[#2FB596]/15 dark:fill-[#9EF0D2]/20" />
-                  <circle r={31} fill="none" strokeWidth={1} className="stroke-[#2FB596] dark:stroke-[#9EF0D2]" />
-                </>
-              )}
+        <circle r={outer} fill="#fff" filter="url(#map-shadow)" />
 
-              <circle r={outer} fill="#fff" filter="url(#map-shadow)" />
+        {person.avatar ? (
+          <>
+            <clipPath id={`clip-${isMe ? "me" : person._id}`}>
+              <circle r={inner} />
+            </clipPath>
 
-              {person.avatar ? (
-                <>
-                  <clipPath id={`clip-${isMe ? "me" : person._id}`}>
-                    <circle r={inner} />
-                  </clipPath>
+            <image
+              href={person.avatar}
+              x={-inner}
+              y={-inner}
+              width={inner * 2}
+              height={inner * 2}
+              clipPath={`url(#clip-${isMe ? "me" : person._id})`}
+              preserveAspectRatio="xMidYMid slice"
+            />
+          </>
+        ) : (
+          <>
+            <circle r={inner} fill={LINE} className={isMe ? "fill-[#2FB596] dark:fill-[#9EF0D2]" : ""} />
 
-                  <image
-                    href={person.avatar}
-                    x={-inner}
-                    y={-inner}
-                    width={inner * 2}
-                    height={inner * 2}
-                    clipPath={`url(#clip-${isMe ? "me" : person._id})`}
-                    preserveAspectRatio="xMidYMid slice"
-                  />
-                </>
-              ) : (
-                <>
-                  <circle r={inner} fill={LINE} className={isMe ? "fill-[#2FB596] dark:fill-[#9EF0D2]" : ""} />
+            <text
+              textAnchor="middle"
+              y={5}
+              fontSize={15}
+              fontWeight={700}
+              className={isMe ? "fill-white dark:fill-[#1D1739]" : "fill-white"}
+            >
+              {initialOf(person)}
+            </text>
+          </>
+        )}
 
-                  <text
-                    textAnchor="middle"
-                    y={isMe ? 7 : 6}
-                    fontSize={isMe ? 22 : 18}
-                    fontWeight={700}
-                    className={isMe ? "fill-white dark:fill-[#1D1739]" : "fill-white"}
-                  >
-                    {initialOf(person)}
-                  </text>
-                </>
-              )}
+        {isMe && (
+          <text
+            textAnchor="middle"
+            y={32}
+            fontSize={11}
+            fontWeight={700}
+            className="map-label fill-[#1F8A72] dark:fill-[#9EF0D2]"
+          >
+            You
+          </text>
+        )}
 
-              {isMe && (
-                <text
-                  textAnchor="middle"
-                  y={44}
-                  fontSize={12}
-                  fontWeight={700}
-                  className="map-label fill-[#1F8A72] dark:fill-[#9EF0D2]"
-                >
-                  You
-                </text>
-              )}
+        <g className="pointer-events-none opacity-0 transition-opacity group-hover:opacity-100">
+          {!isMe && (
+            <text
+              textAnchor="middle"
+              y={-(outer + 20)}
+              fontSize={12}
+              fontWeight={700}
+              className="map-label fill-[#1E1A2F] dark:fill-foreground"
+            >
+              {person.name}
+            </text>
+          )}
 
-              {!isMe && (
-                <g className="pointer-events-none opacity-0 transition-opacity group-hover:opacity-100">
-                  <text
-                    textAnchor="middle"
-                    y={-(outer + 20)}
-                    fontSize={12}
-                    fontWeight={700}
-                    className="map-label fill-[#1E1A2F] dark:fill-foreground"
-                  >
-                    {person.name}
-                  </text>
-
-                  <text
-                    textAnchor="middle"
-                    y={-(outer + 7)}
-                    fontSize={11}
-                    fontWeight={600}
-                    className="map-label fill-muted-foreground dark:fill-[#C6BCE6]"
-                  >
-                    {placeOf(person)}
-                  </text>
-                </g>
-              )}
-            </g>
-          );
-        })}
-      </Marker>
+          <text
+            textAnchor="middle"
+            y={-(outer + (isMe ? 14 : 7))}
+            fontSize={11}
+            fontWeight={600}
+            className="map-label fill-muted-foreground dark:fill-[#C6BCE6]"
+          >
+            {placeOf(person)}
+          </text>
+        </g>
+      </g>
     );
   });
 

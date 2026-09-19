@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { RefreshCw } from "lucide-react";
+import { geoNaturalEarth1 } from "d3-geo";
 import {
   ComposableMap,
   Geographies,
@@ -51,6 +52,43 @@ function ConnectionMap({ circle = [], onRefreshLocation }) {
   const me = hasLoc(user) ? user : null;
   const located = circle.filter(hasLoc);
 
+  //with this we change the zooming of the map according to our circles locations
+  const points = me ? [...located, me] : located;
+  const projection = geoNaturalEarth1();
+
+  if (points.length > 1) {
+    const lons = points.map((person) => person.location.longitude);
+    const lats = points.map((person) => person.location.latitude);
+
+    const midLon = (Math.min(...lons) + Math.max(...lons)) / 2;
+    const midLat = (Math.min(...lats) + Math.max(...lats)) / 2;
+
+    const halfLon = Math.max((Math.max(...lons) - Math.min(...lons)) / 2, 14);
+    const halfLat = Math.max((Math.max(...lats) - Math.min(...lats)) / 2, 8);
+
+    const west = midLon - halfLon;
+    const east = midLon + halfLon;
+    const south = midLat - halfLat;
+    const north = midLat + halfLat;
+    const widest = Math.min(Math.max(0, south), north);
+
+    const corners = {
+      type: "MultiPoint",
+      coordinates: [
+        [west, south],
+        [east, south],
+        [east, north],
+        [west, north],
+        [west, widest],
+        [east, widest],
+      ],
+    };
+
+    projection.fitExtent([[56, 56], [WIDTH - 56, HEIGHT - 56]], corners);
+  } else {
+    projection.scale(SCALE).center(CENTER).translate([WIDTH / 2, HEIGHT / 2]);
+  }
+
   return (
     <section className="glass-card flex h-full flex-col overflow-hidden">
       <div className="px-5 pt-5">
@@ -64,8 +102,7 @@ function ConnectionMap({ circle = [], onRefreshLocation }) {
       </div>
 
       <ComposableMap
-        projection="geoNaturalEarth1"
-        projectionConfig={{ scale: SCALE, center: CENTER }}
+        projection={projection}
         width={WIDTH}
         height={HEIGHT}
         className="min-h-0 w-full max-w-full flex-1"

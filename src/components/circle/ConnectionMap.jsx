@@ -105,7 +105,7 @@ function ConnectionMap({ circle = [], onRefreshLocation }) {
         projection={projection}
         width={WIDTH}
         height={HEIGHT}
-        className="min-h-0 w-full max-w-full flex-1"
+        className="block h-auto w-full max-w-full aspect-[800/420]"
         role="img"
       >
         <defs>
@@ -158,22 +158,37 @@ function ConnectionMap({ circle = [], onRefreshLocation }) {
         </defs>
 
         <Geographies geography={land}>
-          {({ geographies }) =>
-            geographies.map((geo) => (
-              <Geography
-                key={geo.rsmKey}
-                geography={geo}
+          {({ geographies, path }) => (
+            <>
+              <clipPath id="map-land-clip">
+                {geographies.map((geo) => (
+                  <path key={geo.rsmKey} d={path(geo)} />
+                ))}
+              </clipPath>
+
+              <rect
+                width={WIDTH}
+                height={HEIGHT}
                 fill="url(#map-land)"
                 filter="url(#map-grain)"
-                className="stroke-white/60 stroke-[0.4] dark:stroke-white/15"
-                style={{
-                  default: { outline: "none" },
-                  hover: { outline: "none" },
-                  pressed: { outline: "none" },
-                }}
+                clipPath="url(#map-land-clip)"
               />
-            ))
-          }
+
+              {geographies.map((geo) => (
+                <Geography
+                  key={geo.rsmKey}
+                  geography={geo}
+                  fill="none"
+                  className="stroke-white/60 stroke-[0.4] dark:stroke-white/15"
+                  style={{
+                    default: { outline: "none" },
+                    hover: { outline: "none" },
+                    pressed: { outline: "none" },
+                  }}
+                />
+              ))}
+            </>
+          )}
         </Geographies>
 
         <MapPeople me={me} located={located} />

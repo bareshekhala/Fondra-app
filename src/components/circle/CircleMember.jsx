@@ -178,7 +178,7 @@ function CircleMember({ otherUser, onRemoved }) {
         ) : null}
 
         {checkIn && checkIn.note ? (
-          <p className="truncate font-display text-[13px] italic text-[#4A4462] dark:text-[#CFC6E6]">
+          <p className="mt-0.5 pr-2 font-display text-[13px] italic leading-snug break-words text-[#4A4462] dark:text-[#CFC6E6]">
             "{checkIn.note}"
           </p>
         ) : null}

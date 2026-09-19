@@ -1,11 +1,7 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { RefreshCw } from "lucide-react";
 import { geoNaturalEarth1 } from "d3-geo";
-import {
-  ComposableMap,
-  Geographies,
-  Geography,
-} from "react-simple-maps";
+import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 
 import land from "world-atlas/land-110m.json";
 import MapPeople from "@/components/circle/MapPeople.jsx";
@@ -16,10 +12,24 @@ import showError from "@/utils/showError.js";
 function ConnectionMap({ circle = [], onRefreshLocation }) {
   const { user } = useContext(AuthContext);
   const [locating, setLocating] = useState(false);
+  const box = useRef(null);
+  const [HEIGHT, setHeight] = useState(420);
   const WIDTH = 800;
-  const HEIGHT = 420;
   const SCALE = 158;
   const CENTER = [12, 8];
+// this part is added for the the map size to become responsive
+  useEffect(() => {
+    const observer = new ResizeObserver((entries) => {
+      const { width, height } = entries[0].contentRect;
+
+      if (width > 0 && height > 0) {
+        setHeight(Math.round((WIDTH * height) / width));
+      }
+    });
+
+    observer.observe(box.current);
+    return () => observer.disconnect();
+  }, []);
 
   // with this user has an option to update her location
   const handleRefreshLocation = async () => {
@@ -84,9 +94,18 @@ function ConnectionMap({ circle = [], onRefreshLocation }) {
       ],
     };
 
-    projection.fitExtent([[56, 56], [WIDTH - 56, HEIGHT - 56]], corners);
+    projection.fitExtent(
+      [
+        [56, 56],
+        [WIDTH - 56, HEIGHT - 56],
+      ],
+      corners,
+    );
   } else {
-    projection.scale(SCALE).center(CENTER).translate([WIDTH / 2, HEIGHT / 2]);
+    projection
+      .scale(SCALE)
+      .center(CENTER)
+      .translate([WIDTH / 2, HEIGHT / 2]);
   }
 
   return (
@@ -101,98 +120,142 @@ function ConnectionMap({ circle = [], onRefreshLocation }) {
         </p>
       </div>
 
-      <ComposableMap
-        projection={projection}
-        width={WIDTH}
-        height={HEIGHT}
-        className="block h-auto w-full max-w-full aspect-[800/420]"
-        role="img"
+      <div
+        ref={box}
+        className="relative aspect-[800/420] lg:aspect-auto lg:min-h-0 lg:flex-1"
       >
-        <defs>
-          <filter id="map-grain" x="0" y="0" width="100%" height="100%">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.85"
-              numOctaves="2"
-              result="noise"
-            />
-
-            <feColorMatrix
-              in="noise"
-              type="matrix"
-              values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.22 0"
-              result="alphaNoise"
-            />
-
-            <feComposite
-              in="alphaNoise"
-              in2="SourceGraphic"
-              operator="in"
-              result="clipped"
-            />
-
-            <feBlend in="SourceGraphic" in2="clipped" mode="multiply" />
-          </filter>
-
-          <filter id="map-shadow" x="-40%" y="-40%" width="180%" height="180%">
-            <feDropShadow
-              dx="0"
-              dy="2"
-              stdDeviation="2.5"
-              floodColor="#211B3D"
-              floodOpacity="0.22"
-            />
-          </filter>
-
-          <linearGradient id="map-land" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={WIDTH} y2={HEIGHT * 0.4}>
-            <stop offset="0%" className="[stop-color:#CDC2F4] dark:[stop-color:#6457B8]" />
-            <stop offset="50%" className="[stop-color:#F0C6D8] dark:[stop-color:#8F5F8A]" />
-            <stop offset="100%" className="[stop-color:#FFDCC7] dark:[stop-color:#AE7E70]" />
-          </linearGradient>
-
-          <linearGradient id="map-line" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2={WIDTH} y2="0">
-            <stop offset="0%" className="[stop-color:#7C6BD4] dark:[stop-color:#B7A6FF]" />
-            <stop offset="50%" className="[stop-color:#D8789F] dark:[stop-color:#F2A7C3]" />
-            <stop offset="100%" className="[stop-color:#E5956B] dark:[stop-color:#FFD3B6]" />
-          </linearGradient>
-        </defs>
-
-        <Geographies geography={land}>
-          {({ geographies, path }) => (
-            <>
-              <clipPath id="map-land-clip">
-                {geographies.map((geo) => (
-                  <path key={geo.rsmKey} d={path(geo)} />
-                ))}
-              </clipPath>
-
-              <rect
-                width={WIDTH}
-                height={HEIGHT}
-                fill="url(#map-land)"
-                filter="url(#map-grain)"
-                clipPath="url(#map-land-clip)"
+        <ComposableMap
+          projection={projection}
+          width={WIDTH}
+          height={HEIGHT}
+          preserveAspectRatio="xMidYMid slice"
+          className="absolute inset-0 h-full w-full"
+          role="img"
+        >
+          <defs>
+            <filter id="map-grain" x="0" y="0" width="100%" height="100%">
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.85"
+                numOctaves="2"
+                result="noise"
               />
 
-              {geographies.map((geo) => (
-                <Geography
-                  key={geo.rsmKey}
-                  geography={geo}
-                  fill="none"
-                  className="stroke-white/60 stroke-[0.4] dark:stroke-white/15"
-                  style={{
-                    default: { outline: "none" },
-                    hover: { outline: "none" },
-                    pressed: { outline: "none" },
-                  }}
-                />
-              ))}
-            </>
-          )}
-        </Geographies>
+              <feColorMatrix
+                in="noise"
+                type="matrix"
+                values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.22 0"
+                result="alphaNoise"
+              />
 
-        <MapPeople me={me} located={located} />
-      </ComposableMap>
+              <feComposite
+                in="alphaNoise"
+                in2="SourceGraphic"
+                operator="in"
+                result="clipped"
+              />
+
+              <feBlend in="SourceGraphic" in2="clipped" mode="multiply" />
+            </filter>
+
+            <filter
+              id="map-shadow"
+              x="-40%"
+              y="-40%"
+              width="180%"
+              height="180%"
+            >
+              <feDropShadow
+                dx="0"
+                dy="2"
+                stdDeviation="2.5"
+                floodColor="#211B3D"
+                floodOpacity="0.22"
+              />
+            </filter>
+
+            <linearGradient
+              id="map-land"
+              gradientUnits="userSpaceOnUse"
+              x1="0"
+              y1="0"
+              x2={WIDTH}
+              y2={HEIGHT * 0.4}
+            >
+              <stop
+                offset="0%"
+                className="[stop-color:#CDC2F4] dark:[stop-color:#6457B8]"
+              />
+              <stop
+                offset="50%"
+                className="[stop-color:#F0C6D8] dark:[stop-color:#8F5F8A]"
+              />
+              <stop
+                offset="100%"
+                className="[stop-color:#FFDCC7] dark:[stop-color:#AE7E70]"
+              />
+            </linearGradient>
+
+            <linearGradient
+              id="map-line"
+              gradientUnits="userSpaceOnUse"
+              x1="0"
+              y1="0"
+              x2={WIDTH}
+              y2="0"
+            >
+              <stop
+                offset="0%"
+                className="[stop-color:#7C6BD4] dark:[stop-color:#B7A6FF]"
+              />
+              <stop
+                offset="50%"
+                className="[stop-color:#D8789F] dark:[stop-color:#F2A7C3]"
+              />
+              <stop
+                offset="100%"
+                className="[stop-color:#E5956B] dark:[stop-color:#FFD3B6]"
+              />
+            </linearGradient>
+          </defs>
+
+          <Geographies geography={land}>
+            {({ geographies, path }) => (
+              <>
+                <clipPath id="map-land-clip">
+                  {geographies.map((geo) => (
+                    <path key={geo.rsmKey} d={path(geo)} />
+                  ))}
+                </clipPath>
+
+                <rect
+                  width={WIDTH}
+                  height={HEIGHT}
+                  fill="url(#map-land)"
+                  filter="url(#map-grain)"
+                  clipPath="url(#map-land-clip)"
+                />
+
+                {geographies.map((geo) => (
+                  <Geography
+                    key={geo.rsmKey}
+                    geography={geo}
+                    fill="none"
+                    className="stroke-white/60 stroke-[0.4] dark:stroke-white/15"
+                    style={{
+                      default: { outline: "none" },
+                      hover: { outline: "none" },
+                      pressed: { outline: "none" },
+                    }}
+                  />
+                ))}
+              </>
+            )}
+          </Geographies>
+
+          <MapPeople me={me} located={located} />
+        </ComposableMap>
+      </div>
 
       <div className="flex items-center justify-between gap-3 px-5 pb-4 text-[11px] font-medium text-muted-foreground dark:text-[#9C94BC]">
         <p>Locations are approximate</p>
